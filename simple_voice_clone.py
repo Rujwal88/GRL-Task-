@@ -4,38 +4,64 @@ Optimized for most accurate voice cloning - as if the original person is speakin
 """
 
 import os
+import time
 import torch
 from TTS.api import TTS
 from TTS.tts.configs import xtts_config
 from pydub import AudioSegment
 from pydub.effects import normalize, compress_dynamic_range
 import warnings
+from logger_config import logger, log_performance
+import sys
+import platform
 
 warnings.filterwarnings('ignore')
 
 
+# Log System Info on import
+logger.info(f"System Info: Python {sys.version}, Platform: {platform.platform()}")
+try:
+    logger.info(f"PyTorch Version: {torch.__version__}")
+    logger.info(f"CUDA Available: {torch.cuda.is_available()}")
+    if torch.cuda.is_available():
+        logger.info(f"GPU Name: {torch.cuda.get_device_name(0)}")
+except:
+    pass
+
+@log_performance
 def preprocess_audio_for_best_quality(speaker_audio):
     """
     Preprocess audio for maximum cloning accuracy
     Returns path to optimized temporary file
     """
-    print("🔧 Preprocessing audio for maximum quality...")
+    logger.info("🔧 Preprocessing audio for maximum quality...")
+
+    # Timing
+    t0 = time.perf_counter()
 
     # Load audio
     audio = AudioSegment.from_file(speaker_audio)
+    t1 = time.perf_counter()
+    logger.debug(f"   [Time] Load Audio: {t1-t0:.4f}s")
 
     # Convert to mono if stereo
     if audio.channels > 1:
         audio = audio.set_channels(1)
-        print("   ✓ Converted to mono")
+        logger.info("   ✓ Converted to mono")
+    t2 = time.perf_counter()
+    logger.debug(f"   [Time] Mono Conversion: {t2-t1:.4f}s")
 
     # Set optimal sample rate for XTTS
     audio = audio.set_frame_rate(22050)
-    print("   ✓ Optimized sample rate")
+    logger.info("   ✓ Optimized sample rate")
+    t3 = time.perf_counter()
+    logger.debug(f"   [Time] Resample: {t3-t2:.4f}s")
 
     # Normalize volume for consistency
     audio = normalize(audio)
-    print("   ✓ Normalized volume")
+    logger.info("   ✓ Normalized volume")
+    t4 = time.perf_counter()
+    logger.debug(f"   [Time] Normalize: {t4-t3:.4f}s")
 
     # Apply gentle compression for consistent voice level
     audio = compress_dynamic_range(
@@ -45,11 +71,15 @@ def preprocess_audio_for_best_quality(speaker_audio):
         attack=5.0,
         release=50.0
     )
-    print("   ✓ Applied dynamic compression")
+    logger.info("   ✓ Applied dynamic compression")
+    t5 = time.perf_counter()
+    logger.debug(f"   [Time] Compression: {t5-t4:.4f}s")
 
     # Remove silence from edges but keep natural pauses
     audio = audio.strip_silence(silence_thresh=-40, padding=150)
-    print("   ✓ Trimmed edges")
+    logger.info("   ✓ Trimmed edges")
+    t6 = time.perf_counter()
+    logger.debug(f"   [Time] Strip Silence: {t6-t5:.4f}s")
 
     # Optimal length: 10-30 seconds for best results
     duration = len(audio) / 1000.0
@@ -57,18 +87,21 @@ def preprocess_audio_for_best_quality(speaker_audio):
         # Take middle section for best quality
         start_ms = (len(audio) - 30000) // 2
         audio = audio[start_ms:start_ms + 30000]
-        print(f"   ✓ Using middle 30s section (original: {duration:.1f}s)")
+        logger.info(f"   ✓ Using middle 30s section (original: {duration:.1f}s)")
     elif duration < 6:
-        print(f"   ⚠️  Warning: Audio is short ({duration:.1f}s). 10+ seconds recommended")
+        logger.warning(f"   ⚠️  Warning: Audio is short ({duration:.1f}s). 10+ seconds recommended")
 
     # Save preprocessed audio
     temp_file = "temp_preprocessed_voice.wav"
     audio.export(temp_file, format="wav")
-    print(f"   ✓ Preprocessed audio ready ({len(audio)/1000.0:.1f}s)\n")
+    t7 = time.perf_counter()
+    logger.debug(f"   [Time] Export: {t7-t6:.4f}s")
+    logger.info(f"   ✓ Preprocessed audio ready ({len(audio)/1000.0:.1f}s)\n")
 
     return temp_file
 
 
+@log_performance
 def clone_voice_simple(text, speaker_audio, output_file="cloned_voice.wav", language="en", preprocess=True):
     """
     Maximum quality voice cloning - makes it sound like the original person
@@ -81,46 +114,66 @@ def clone_voice_simple(text, speaker_audio, output_file="cloned_voice.wav", lang
         preprocess (bool): Automatically optimize audio for best results (recommended: True)
 
     Returns:
+    Returns:
         str: Path to the generated audio file
     """
-    print("🎙️  Maximum Quality Voice Cloning Started...")
-    print(f"📝 Text: {text[:100]}..." if len(text) > 100 else f"📝 Text: {text}")
-    print(f"🔊 Voice sample: {speaker_audio}")
+    logger.info(f"Task: Cloning voice. Text Length: {len(text)} characters.")
+    logger.info("🎙️  Maximum Quality Voice Cloning Started...")
+    logger.info(f"📝 Text: {text[:100]}..." if len(text) > 100 else f"📝 Text: {text}")
+    logger.info(f"🔊 Voice sample: {speaker_audio}")
 
     # Check if speaker audio exists
     if not os.path.exists(speaker_audio):
         raise FileNotFoundError(f"❌ Voice sample not found: {speaker_audio}")
 
+    # Complexity Analysis: Audio preprocessing is roughly O(N) on sample duration.
+    # Current sample duration: ~{len(audio)/1000}s
+    
     # Preprocess audio for best quality
     processed_audio = speaker_audio
     if preprocess:
         try:
+            logger.info("   ℹ️  Step: Preprocessing (Complexity: O(N))")
             processed_audio = preprocess_audio_for_best_quality(speaker_audio)
         except Exception as e:
-            print(f"   ⚠️  Preprocessing failed: {e}")
-            print("   ℹ️  Using original audio\n")
+            logger.error(f"   ⚠️  Preprocessing failed: {e}", exc_info=True)
+            logger.info("   ℹ️  Using original audio\n")
             processed_audio = speaker_audio
+
 
     # Allow XTTS config for unpickling
     torch.serialization.add_safe_globals([xtts_config.XttsConfig])
 
     # Initialize TTS model
-    print("⏳ Loading AI model (this may take a moment)...")
+    logger.info("⏳ Loading AI model (this may take a moment)...")
+    t_load_start = time.perf_counter()
+    
     use_gpu = torch.cuda.is_available()
-    if use_gpu:
-        print("   🚀 GPU detected - using hardware acceleration")
-
+    device = "cuda" if use_gpu else "cpu"
+    
     tts = TTS(
         model_name="tts_models/multilingual/multi-dataset/xtts_v2",
         gpu=use_gpu
     )
+    
+    t_load_end = time.perf_counter()
+    logger.info(f"   ✓ Model loaded in {t_load_end - t_load_start:.2f}s")
+
+    if use_gpu:
+        try:
+            gpu_mem = torch.cuda.memory_allocated() / (1024*1024)
+            logger.info(f"   🚀 GPU: {torch.cuda.get_device_name(0)} (Memory used: {gpu_mem:.2f} MB)")
+        except:
+            logger.info("   🚀 GPU detected")
+    else:
+        logger.info("   💻 Using CPU")
 
     # Generate speech with MAXIMUM quality settings
-    print("\n🎨 Generating speech with cloned voice...")
-    print("   Settings: MAXIMUM QUALITY MODE")
-    print("   • Ultra-low temperature for exact voice matching")
-    print("   • High repetition penalty for natural speech")
-    print("   • Optimized length ratio for best prosody\n")
+    logger.info("\n🎨 Generating speech with cloned voice...")
+    logger.info("   Settings: MAXIMUM QUALITY MODE")
+    logger.info("   • Ultra-low temperature for exact voice matching")
+    logger.info("   • High repetition penalty for natural speech")
+    logger.info("   • Optimized length ratio for best prosody\n")
 
     tts.tts_to_file(
         text=text,
@@ -146,10 +199,10 @@ def clone_voice_simple(text, speaker_audio, output_file="cloned_voice.wav", lang
     try:
         output_audio = AudioSegment.from_file(output_file)
         duration = len(output_audio) / 1000.0
-        print(f"✅ Success! Audio saved to: {output_file}")
-        print(f"   📊 Duration: {duration:.2f} seconds")
+        logger.info(f"✅ Success! Audio saved to: {output_file}")
+        logger.info(f"   📊 Duration: {duration:.2f} seconds")
     except:
-        print(f"\n✅ Success! Audio saved to: {output_file}")
+        logger.info(f"\n✅ Success! Audio saved to: {output_file}")
 
     return output_file
 
@@ -167,11 +220,11 @@ if __name__ == "__main__":
     LANGUAGE = "en"  # Language: en, es, fr, de, it, pt, pl, tr, ru, nl, cs, ar, zh-cn, ja, ko, hu
     # ===============================================
 
-    print("=" * 80)
-    print("🎭 MAXIMUM QUALITY VOICE CLONING")
-    print("=" * 80)
-    print("\nThis will create the BEST possible clone of your voice.")
-    print("Settings are optimized for maximum similarity to original speaker.\n")
+    logger.info("=" * 80)
+    logger.info("🎭 MAXIMUM QUALITY VOICE CLONING")
+    logger.info("=" * 80)
+    logger.info("\nThis will create the BEST possible clone of your voice.")
+    logger.info("Settings are optimized for maximum similarity to original speaker.\n")
 
     try:
         # Generate with maximum quality
@@ -184,23 +237,24 @@ if __name__ == "__main__":
         )
 
         print("\n" + "=" * 80)
-        print("🎉 VOICE CLONING COMPLETED!")
-        print("=" * 80)
-        print(f"\n📁 Output file: {output}")
-        print("\n💡 TIPS FOR EVEN BETTER RESULTS:")
-        print("   1. Use a 15-20 second voice sample (longer = better)")
-        print("   2. Record in a quiet room with good microphone")
-        print("   3. Speak naturally, not like reading")
-        print("   4. Avoid background noise, music, or multiple speakers")
-        print("\n   If quality is still not perfect, try recording a new")
-        print("   voice sample following the tips above!")
-        print("=" * 80)
+        logger.info("🎉 VOICE CLONING COMPLETED!")
+        logger.info("=" * 80)
+        logger.info(f"\n📁 Output file: {output}")
+        logger.info("\n💡 TIPS FOR EVEN BETTER RESULTS:")
+        logger.info("   1. Use a 15-20 second voice sample (longer = better)")
+        logger.info("   2. Record in a quiet room with good microphone")
+        logger.info("   3. Speak naturally, not like reading")
+        logger.info("   4. Avoid background noise, music, or multiple speakers")
+        logger.info("\n   If quality is still not perfect, try recording a new")
+        logger.info("   voice sample following the tips above!")
+        logger.info("=" * 80)
 
     except Exception as e:
-        print(f"\n❌ Error: {e}")
+        logger.error(f"\n❌ Error: {e}")
         import traceback
-        traceback.print_exc()
-        print("\n💡 Common fixes:")
-        print("   • Make sure 'myvoice.wav' exists in this folder")
-        print("   • Check if pydub is installed: pip install pydub")
-        print("   • Install ffmpeg: conda install -c conda-forge ffmpeg")
+        # traceback.print_exc() # logger.error with exc_info=True handles this usually, but let's just log error
+        logger.error(traceback.format_exc())
+        logger.info("\n💡 Common fixes:")
+        logger.info("   • Make sure 'myvoice.wav' exists in this folder")
+        logger.info("   • Check if pydub is installed: pip install pydub")
+        logger.info("   • Install ffmpeg: conda install -c conda-forge ffmpeg")

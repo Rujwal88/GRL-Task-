@@ -8,10 +8,12 @@ from pydub import AudioSegment
 from pydub.effects import normalize, compress_dynamic_range
 from pydub.silence import detect_nonsilent
 import warnings
+from logger_config import logger, log_performance
 
 warnings.filterwarnings('ignore')
 
 
+@log_performance
 def analyze_voice_sample(audio_path):
     """
     Analyze a voice sample and provide recommendations
@@ -22,8 +24,8 @@ def analyze_voice_sample(audio_path):
     Returns:
         dict: Analysis results
     """
-    print(f"🔍 Analyzing: {audio_path}")
-    print("=" * 70)
+    logger.info(f"🔍 Analyzing: {audio_path}")
+    logger.info("=" * 70)
 
     if not os.path.exists(audio_path):
         raise FileNotFoundError(f"Audio file not found: {audio_path}")
@@ -63,17 +65,17 @@ def analyze_voice_sample(audio_path):
     }
 
     # Display results
-    print(f"📊 BASIC INFO:")
-    print(f"   Duration: {duration_sec:.2f} seconds")
-    print(f"   Speech: {speech_duration:.2f}s | Silence: {silence_duration:.2f}s")
-    print(f"   Channels: {channels} ({'Mono' if channels == 1 else 'Stereo'})")
-    print(f"   Sample Rate: {sample_rate} Hz")
-    print(f"   File Size: {file_size_mb:.2f} MB")
-    print(f"   Loudness: {loudness:.2f} dBFS")
-    print(f"   Speech Segments: {len(nonsilent_ranges)}")
+    logger.info(f"📊 BASIC INFO:")
+    logger.info(f"   Duration: {duration_sec:.2f} seconds")
+    logger.info(f"   Speech: {speech_duration:.2f}s | Silence: {silence_duration:.2f}s")
+    logger.info(f"   Channels: {channels} ({'Mono' if channels == 1 else 'Stereo'})")
+    logger.info(f"   Sample Rate: {sample_rate} Hz")
+    logger.info(f"   File Size: {file_size_mb:.2f} MB")
+    logger.info(f"   Loudness: {loudness:.2f} dBFS")
+    logger.info(f"   Speech Segments: {len(nonsilent_ranges)}")
 
     # Recommendations
-    print(f"\n💡 RECOMMENDATIONS:")
+    logger.info(f"\n💡 RECOMMENDATIONS:")
     issues = []
     recommendations = []
 
@@ -124,32 +126,33 @@ def analyze_voice_sample(audio_path):
 
     # Print issues and recommendations
     for issue in issues:
-        print(f"   {issue}")
+        logger.info(f"   {issue}")
 
     if recommendations:
-        print(f"\n🔧 SUGGESTED IMPROVEMENTS:")
+        logger.info(f"\n🔧 SUGGESTED IMPROVEMENTS:")
         for i, rec in enumerate(recommendations, 1):
-            print(f"   {i}. {rec}")
+            logger.info(f"   {i}. {rec}")
 
     # Overall score
     score = sum(1 for i in issues if "✅" in i)
     total = len(issues)
     quality_score = (score / total) * 100
 
-    print(f"\n📈 QUALITY SCORE: {quality_score:.0f}% ({score}/{total} optimal)")
+    logger.info(f"\n📈 QUALITY SCORE: {quality_score:.0f}% ({score}/{total} optimal)")
 
     if quality_score >= 80:
-        print("   🌟 Excellent! This sample should work very well.")
+        logger.info("   🌟 Excellent! This sample should work very well.")
     elif quality_score >= 60:
-        print("   👍 Good! Some improvements could help.")
+        logger.info("   👍 Good! Some improvements could help.")
     else:
-        print("   ⚠️  Needs improvement for best results.")
+        logger.info("   ⚠️  Needs improvement for best results.")
 
-    print("=" * 70)
+    logger.info("=" * 70)
 
     return results
 
 
+@log_performance
 def optimize_voice_sample(input_path, output_path="optimized_voice.wav"):
     """
     Optimize voice sample for best cloning results
@@ -161,65 +164,67 @@ def optimize_voice_sample(input_path, output_path="optimized_voice.wav"):
     Returns:
         str: Path to optimized file
     """
-    print(f"\n🔧 Optimizing: {input_path}")
-    print("=" * 70)
+    logger.info(f"\n🔧 Optimizing: {input_path}")
+    logger.info("=" * 70)
 
     # Load audio
     audio = AudioSegment.from_file(input_path)
     original_duration = len(audio) / 1000.0
 
-    print("⚙️  Applying optimizations...")
+    logger.info("⚙️  Applying optimizations...")
+    # Complexity: O(N) where N is duration of audio.
+    # Operations are linear passes (normalize, compress, trim).
 
     # 1. Convert to mono
     if audio.channels > 1:
         audio = audio.set_channels(1)
-        print("   ✓ Converted to mono")
+        logger.info("   ✓ Converted to mono")
 
     # 2. Set optimal sample rate
     if audio.frame_rate != 22050:
         audio = audio.set_frame_rate(22050)
-        print("   ✓ Set sample rate to 22050 Hz")
+        logger.info("   ✓ Set sample rate to 22050 Hz")
 
     # 3. Normalize volume
     audio = normalize(audio)
-    print("   ✓ Normalized volume")
+    logger.info("   ✓ Normalized volume")
 
     # 4. Apply dynamic range compression (makes voice more consistent)
     audio = compress_dynamic_range(audio, threshold=-20.0, ratio=4.0, attack=5.0, release=50.0)
-    print("   ✓ Applied dynamic range compression")
+    logger.info("   ✓ Applied dynamic range compression")
 
     # 5. Remove silence from edges
     audio = audio.strip_silence(silence_thresh=-40, padding=100)
-    print("   ✓ Trimmed silence from edges")
+    logger.info("   ✓ Trimmed silence from edges")
 
     # 6. Optimal length (10-30 seconds)
     current_duration = len(audio) / 1000.0
     if current_duration > 30:
         audio = audio[:30000]
-        print(f"   ✓ Trimmed to 30 seconds (was {current_duration:.1f}s)")
+        logger.info(f"   ✓ Trimmed to 30 seconds (was {current_duration:.1f}s)")
     elif current_duration < 10:
-        print(f"   ⚠️  Audio is short ({current_duration:.1f}s) - recommend recording more")
+        logger.info(f"   ⚠️  Audio is short ({current_duration:.1f}s) - recommend recording more")
 
     # Export optimized audio
     audio.export(output_path, format="wav")
 
     final_duration = len(audio) / 1000.0
-    print(f"\n✅ Optimized audio saved: {output_path}")
-    print(f"   Original: {original_duration:.2f}s → Optimized: {final_duration:.2f}s")
-    print("=" * 70)
+    logger.info(f"\n✅ Optimized audio saved: {output_path}")
+    logger.info(f"   Original: {original_duration:.2f}s → Optimized: {final_duration:.2f}s")
+    logger.info("=" * 70)
 
     return output_path
 
 
 def compare_samples(original_path, optimized_path):
     """Compare original and optimized samples"""
-    print("\n📊 COMPARISON:")
-    print("=" * 70)
+    logger.info("\n📊 COMPARISON:")
+    logger.info("=" * 70)
 
-    print("\n🔴 ORIGINAL:")
+    logger.info("\n🔴 ORIGINAL:")
     analyze_voice_sample(original_path)
 
-    print("\n🟢 OPTIMIZED:")
+    logger.info("\n🟢 OPTIMIZED:")
     analyze_voice_sample(optimized_path)
 
 
@@ -230,38 +235,38 @@ if __name__ == "__main__":
     VOICE_SAMPLE = "myvoice.wav"
 
     if not os.path.exists(VOICE_SAMPLE):
-        print(f"❌ Error: {VOICE_SAMPLE} not found")
-        print("Please make sure your voice sample is in the current directory")
+        logger.error(f"❌ Error: {VOICE_SAMPLE} not found")
+        logger.info("Please make sure your voice sample is in the current directory")
         sys.exit(1)
 
-    print("=" * 70)
-    print("🎙️  VOICE SAMPLE ANALYZER & OPTIMIZER")
-    print("=" * 70)
+    logger.info("=" * 70)
+    logger.info("🎙️  VOICE SAMPLE ANALYZER & OPTIMIZER")
+    logger.info("=" * 70)
 
     # Step 1: Analyze original
-    print("\n📋 STEP 1: Analyzing your current voice sample")
+    logger.info("\n📋 STEP 1: Analyzing your current voice sample")
     results = analyze_voice_sample(VOICE_SAMPLE)
 
     # Step 2: Optimize
-    print("\n📋 STEP 2: Creating optimized version")
+    logger.info("\n📋 STEP 2: Creating optimized version")
     optimized_file = optimize_voice_sample(VOICE_SAMPLE, "myvoice_optimized.wav")
 
     # Step 3: Analyze optimized
-    print("\n📋 STEP 3: Analyzing optimized version")
+    logger.info("\n📋 STEP 3: Analyzing optimized version")
     analyze_voice_sample(optimized_file)
 
     # Final recommendations
-    print("\n🎯 NEXT STEPS:")
-    print("=" * 70)
-    print("1. Compare the audio files:")
-    print(f"   - Original: {VOICE_SAMPLE}")
-    print(f"   - Optimized: {optimized_file}")
-    print("\n2. Use the optimized version in your voice cloning:")
-    print(f"   python enhanced_voice_cloner.py")
-    print("   (Edit the script to use 'myvoice_optimized.wav')")
-    print("\n3. If results are still not good enough:")
-    print("   - Record a new sample in a quiet room")
-    print("   - Speak naturally for 15-20 seconds")
-    print("   - Use a good quality microphone")
-    print("   - Avoid background noise and music")
-    print("=" * 70)
+    logger.info("\n🎯 NEXT STEPS:")
+    logger.info("=" * 70)
+    logger.info("1. Compare the audio files:")
+    logger.info(f"   - Original: {VOICE_SAMPLE}")
+    logger.info(f"   - Optimized: {optimized_file}")
+    logger.info("\n2. Use the optimized version in your voice cloning:")
+    logger.info(f"   python enhanced_voice_cloner.py")
+    logger.info("   (Edit the script to use 'myvoice_optimized.wav')")
+    logger.info("\n3. If results are still not good enough:")
+    logger.info("   - Record a new sample in a quiet room")
+    logger.info("   - Speak naturally for 15-20 seconds")
+    logger.info("   - Use a good quality microphone")
+    logger.info("   - Avoid background noise and music")
+    logger.info("=" * 70)

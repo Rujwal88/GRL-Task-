@@ -15,3 +15,5 @@ pydub>=0.25.1
 # librosa
 # transformers
 # encodec
+# System monitoring
+psutil>=5.9.0
