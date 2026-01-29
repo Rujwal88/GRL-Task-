@@ -1,0 +1,12 @@
+{
+    "tts_model": "xtts_v2",
+    "audio_format": "wav",
+    "sample_rate": 22050,
+    "model_settings": {
+        "temperature": 0.05,
+        "repetition_penalty": 10.0,
+        "speed": 0.98,
+        "length_penalty": 1.0,
+        "enable_text_splitting": true
+    }
+}

@@ -37,6 +37,13 @@ def setup_logger(name="voice_cloning"):
     logger.addHandler(file_handler)
 
     # Console Handler
+    # Ensure stdout handles unicode (emojis) on Windows
+    if sys.platform == 'win32' and hasattr(sys.stdout, 'reconfigure'):
+        try:
+            sys.stdout.reconfigure(encoding='utf-8')
+        except:
+            pass
+            
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setLevel(logging.INFO)
     console_handler.setFormatter(formatter)

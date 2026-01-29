@@ -415,3 +415,379 @@ This will create the BEST possible clone of your voice.
    ⚙️  CPU Usage (Process): 0.0%
    🔙 Return: <list (len=5)> :: [2, 4, 6, 8, 10]
 2026-01-29 13:24:40,144 - INFO - logger_config - <module>() - Test complete.
+2026-01-29 13:39:40,811 - INFO - simple_voice_clone - <module>() - System Info: Python 3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)], Platform: Windows-11-10.0.22631-SP0
+2026-01-29 13:39:40,812 - INFO - simple_voice_clone - <module>() - PyTorch Version: [SIMULATED]
+2026-01-29 13:39:40,813 - INFO - simple_voice_clone - <module>() - CUDA Available: False
+2026-01-29 13:39:40,813 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:39:40,813 - INFO - simple_voice_clone - <module>() - 🎭 MAXIMUM QUALITY VOICE CLONING
+2026-01-29 13:39:40,821 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:39:40,821 - INFO - simple_voice_clone - <module>() - 
+This will create the BEST possible clone of your voice.
+2026-01-29 13:39:40,822 - INFO - simple_voice_clone - <module>() - Settings are optimized for maximum similarity to original speaker.
+
+2026-01-29 13:39:40,822 - DEBUG - logger_config - wrapper() - Entering clone_voice_simple | Args: [] | Kwargs: {'text': '<str (len=518)>', 'speaker_audio': '<str (len=11)>', 'output_file': '<str (len=22)>', 'language': '<str (len=2)>', 'preprocess': '<bool>'}
+2026-01-29 13:39:40,822 - INFO - simple_voice_clone - clone_voice_simple() - Task: Cloning voice. Text Length: 518 characters.
+2026-01-29 13:39:40,822 - INFO - simple_voice_clone - clone_voice_simple() - 🎙️  Maximum Quality Voice Cloning Started...
+2026-01-29 13:39:40,824 - WARNING - simple_voice_clone - clone_voice_simple() - ⚠️  RUNNING IN SIMULATION MODE (Missing AI Libraries)
+2026-01-29 13:39:40,826 - INFO - simple_voice_clone - clone_voice_simple() -    Output will be simulated based on existing audio.
+2026-01-29 13:39:40,826 - INFO - simple_voice_clone - clone_voice_simple() - 📝 Text: 
+    Hi, I'm Nithin—a professional overthinker, occasional snack enthusiast, and full-time champion ...
+2026-01-29 13:39:40,827 - INFO - simple_voice_clone - clone_voice_simple() - 🔊 Voice sample: myvoice.wav
+2026-01-29 13:39:40,829 - INFO - simple_voice_clone - clone_voice_simple() -    ℹ️  Complexity Observation: Inference is O(L) where L is text length. Model loading is O(1) constant overhead.
+2026-01-29 13:39:40,830 - INFO - simple_voice_clone - clone_voice_simple() -    ℹ️  Step: Preprocessing (Complexity: O(N))
+2026-01-29 13:39:40,831 - DEBUG - logger_config - wrapper() - Entering preprocess_audio_for_best_quality | Args: ['<str (len=11)>'] | Kwargs: {}
+2026-01-29 13:39:40,831 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() - 🔧 Preprocessing audio for maximum quality...
+2026-01-29 13:39:40,832 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ℹ️  Complexity Observation: Time & Space O(T) relative to audio duration.
+2026-01-29 13:39:40,848 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Load Audio: 0.0161s
+2026-01-29 13:39:40,849 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Converted to mono
+2026-01-29 13:39:40,851 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Mono Conversion: 0.0031s
+2026-01-29 13:39:40,852 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Optimized sample rate
+2026-01-29 13:39:40,853 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Resample: 0.0020s
+2026-01-29 13:39:40,854 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Normalized volume
+2026-01-29 13:39:40,855 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Normalize: 0.0015s
+2026-01-29 13:39:40,855 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Applied dynamic compression
+2026-01-29 13:39:40,856 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Compression: 0.0013s
+2026-01-29 13:39:40,856 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Trimmed edges
+2026-01-29 13:39:40,858 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Strip Silence: 0.0013s
+2026-01-29 13:39:40,859 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Export: 0.0015s
+2026-01-29 13:39:40,859 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Preprocessed audio ready (15.0s)
+
+2026-01-29 13:39:40,861 - INFO - logger_config - wrapper() - Exiting preprocess_audio_for_best_quality
+   ⏱️  Duration: 0.0296s
+   💾 Memory: 27.36MB -> 27.36MB (Delta: +0.00MB)
+   ⚙️  CPU Usage (Process): 52.3%
+   🔙 Return: <str (len=27)> :: temp_preprocessed_voice.wav
+2026-01-29 13:39:40,871 - INFO - config_loader - load_config() - ✅ Configuration loaded from config.json
+2026-01-29 13:39:40,873 - DEBUG - config_loader - load_config() -    Config content: {'tts_model': 'xtts_v2', 'audio_format': 'wav', 'sample_rate': 22050, 'model_settings': {'temperature': 0.05, 'repetition_penalty': 10.0, 'speed': 0.98, 'length_penalty': 1.0, 'enable_text_splitting': True}}
+2026-01-29 13:39:40,873 - INFO - simple_voice_clone - clone_voice_simple() - ⚙️  System Configuration:
+2026-01-29 13:39:40,875 - INFO - simple_voice_clone - clone_voice_simple() -    • Model: xtts_v2
+2026-01-29 13:39:40,876 - INFO - simple_voice_clone - clone_voice_simple() -    • Format: wav
+2026-01-29 13:39:40,876 - INFO - simple_voice_clone - clone_voice_simple() -    • Settings: {'temperature': 0.05, 'repetition_penalty': 10.0, 'speed': 0.98, 'length_penalty': 1.0, 'enable_text_splitting': True}
+2026-01-29 13:39:40,876 - INFO - simple_voice_clone - clone_voice_simple() - ⏳ Loading AI model (this may take a moment)...
+2026-01-29 13:39:40,877 - INFO - simple_voice_clone - clone_voice_simple() -    ✓ Model loaded in 0.00s
+2026-01-29 13:39:40,878 - INFO - simple_voice_clone - clone_voice_simple() -    💻 Using CPU
+2026-01-29 13:39:40,879 - INFO - simple_voice_clone - clone_voice_simple() - 
+🎨 Generating speech with cloned voice...
+2026-01-29 13:39:47,067 - INFO - simple_voice_clone - clone_voice_simple() - ✅ Success! Audio saved to: output_max_quality.wav
+2026-01-29 13:39:47,070 - INFO - simple_voice_clone - clone_voice_simple() -    📊 Duration: 15.00 seconds
+2026-01-29 13:39:47,072 - INFO - logger_config - wrapper() - Exiting clone_voice_simple
+   ⏱️  Duration: 6.2495s
+   💾 Memory: 27.31MB -> 27.46MB (Delta: +0.15MB)
+   ⚙️  CPU Usage (Process): 0.5%
+   🔙 Return: <str (len=22)> :: output_max_quality.wav
+2026-01-29 13:39:47,073 - INFO - simple_voice_clone - <module>() - 🎉 VOICE CLONING COMPLETED!
+2026-01-29 13:39:47,075 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:39:47,075 - INFO - simple_voice_clone - <module>() - 
+📁 Output file: output_max_quality.wav
+2026-01-29 13:39:47,078 - INFO - simple_voice_clone - <module>() - 
+💡 TIPS FOR EVEN BETTER RESULTS:
+2026-01-29 13:39:47,080 - INFO - simple_voice_clone - <module>() -    1. Use a 15-20 second voice sample (longer = better)
+2026-01-29 13:39:47,080 - INFO - simple_voice_clone - <module>() -    2. Record in a quiet room with good microphone
+2026-01-29 13:39:47,080 - INFO - simple_voice_clone - <module>() -    3. Speak naturally, not like reading
+2026-01-29 13:39:47,081 - INFO - simple_voice_clone - <module>() -    4. Avoid background noise, music, or multiple speakers
+2026-01-29 13:39:47,081 - INFO - simple_voice_clone - <module>() - 
+   If quality is still not perfect, try recording a new
+2026-01-29 13:39:47,081 - INFO - simple_voice_clone - <module>() -    voice sample following the tips above!
+2026-01-29 13:39:47,081 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:40:12,029 - INFO - simple_voice_clone - <module>() - System Info: Python 3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)], Platform: Windows-11-10.0.22631-SP0
+2026-01-29 13:40:12,030 - INFO - simple_voice_clone - <module>() - PyTorch Version: [SIMULATED]
+2026-01-29 13:40:12,031 - INFO - simple_voice_clone - <module>() - CUDA Available: False
+2026-01-29 13:40:12,031 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:40:12,031 - INFO - simple_voice_clone - <module>() - 🎭 MAXIMUM QUALITY VOICE CLONING
+2026-01-29 13:40:12,036 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:40:12,036 - INFO - simple_voice_clone - <module>() - 
+This will create the BEST possible clone of your voice.
+2026-01-29 13:40:12,036 - INFO - simple_voice_clone - <module>() - Settings are optimized for maximum similarity to original speaker.
+
+2026-01-29 13:40:12,036 - DEBUG - logger_config - wrapper() - Entering clone_voice_simple | Args: [] | Kwargs: {'text': '<str (len=518)>', 'speaker_audio': '<str (len=11)>', 'output_file': '<str (len=22)>', 'language': '<str (len=2)>', 'preprocess': '<bool>'}
+2026-01-29 13:40:12,036 - INFO - simple_voice_clone - clone_voice_simple() - Task: Cloning voice. Text Length: 518 characters.
+2026-01-29 13:40:12,037 - INFO - simple_voice_clone - clone_voice_simple() - 🎙️  Maximum Quality Voice Cloning Started...
+2026-01-29 13:40:12,039 - WARNING - simple_voice_clone - clone_voice_simple() - ⚠️  RUNNING IN SIMULATION MODE (Missing AI Libraries)
+2026-01-29 13:40:12,040 - INFO - simple_voice_clone - clone_voice_simple() -    Output will be simulated based on existing audio.
+2026-01-29 13:40:12,040 - INFO - simple_voice_clone - clone_voice_simple() - 📝 Text: 
+    Hi, I'm Nithin—a professional overthinker, occasional snack enthusiast, and full-time champion ...
+2026-01-29 13:40:12,041 - INFO - simple_voice_clone - clone_voice_simple() - 🔊 Voice sample: myvoice.wav
+2026-01-29 13:40:12,042 - INFO - simple_voice_clone - clone_voice_simple() -    ℹ️  Complexity Observation: Inference is O(L) where L is text length. Model loading is O(1) constant overhead.
+2026-01-29 13:40:12,043 - INFO - simple_voice_clone - clone_voice_simple() -    ℹ️  Step: Preprocessing (Complexity: O(N))
+2026-01-29 13:40:12,043 - DEBUG - logger_config - wrapper() - Entering preprocess_audio_for_best_quality | Args: ['<str (len=11)>'] | Kwargs: {}
+2026-01-29 13:40:12,044 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() - 🔧 Preprocessing audio for maximum quality...
+2026-01-29 13:40:12,044 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ℹ️  Complexity Observation: Time & Space O(T) relative to audio duration.
+2026-01-29 13:40:12,045 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Load Audio: 0.0009s
+2026-01-29 13:40:12,045 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Converted to mono
+2026-01-29 13:40:12,046 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Mono Conversion: 0.0009s
+2026-01-29 13:40:12,046 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Optimized sample rate
+2026-01-29 13:40:12,047 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Resample: 0.0010s
+2026-01-29 13:40:12,047 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Normalized volume
+2026-01-29 13:40:12,048 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Normalize: 0.0010s
+2026-01-29 13:40:12,048 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Applied dynamic compression
+2026-01-29 13:40:12,049 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Compression: 0.0010s
+2026-01-29 13:40:12,049 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Trimmed edges
+2026-01-29 13:40:12,050 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Strip Silence: 0.0010s
+2026-01-29 13:40:12,051 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Export: 0.0009s
+2026-01-29 13:40:12,051 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Preprocessed audio ready (15.0s)
+
+2026-01-29 13:40:12,052 - INFO - logger_config - wrapper() - Exiting preprocess_audio_for_best_quality
+   ⏱️  Duration: 0.0086s
+   💾 Memory: 27.45MB -> 27.45MB (Delta: +0.01MB)
+   ⚙️  CPU Usage (Process): 0.0%
+   🔙 Return: <str (len=27)> :: temp_preprocessed_voice.wav
+2026-01-29 13:40:12,055 - INFO - config_loader - load_config() - ✅ Configuration loaded from config.json
+2026-01-29 13:40:12,057 - DEBUG - config_loader - load_config() -    Config content: {'tts_model': 'qwen3_tts', 'audio_format': 'wav', 'sample_rate': 22050, 'model_settings': {'temperature': 0.05, 'repetition_penalty': 10.0, 'speed': 0.98, 'length_penalty': 1.0, 'enable_text_splitting': True}}
+2026-01-29 13:40:12,057 - INFO - simple_voice_clone - clone_voice_simple() - ⚙️  System Configuration:
+2026-01-29 13:40:12,058 - INFO - simple_voice_clone - clone_voice_simple() -    • Model: qwen3_tts
+2026-01-29 13:40:12,058 - INFO - simple_voice_clone - clone_voice_simple() -    • Format: wav
+2026-01-29 13:40:12,058 - INFO - simple_voice_clone - clone_voice_simple() -    • Settings: {'temperature': 0.05, 'repetition_penalty': 10.0, 'speed': 0.98, 'length_penalty': 1.0, 'enable_text_splitting': True}
+2026-01-29 13:40:12,058 - INFO - simple_voice_clone - clone_voice_simple() - ⏳ Loading AI model (this may take a moment)...
+2026-01-29 13:40:12,059 - INFO - simple_voice_clone - clone_voice_simple() -    🤖 Initializing Qwen3 TTS Engine (Placeholder)...
+2026-01-29 13:40:12,060 - WARNING - simple_voice_clone - clone_voice_simple() -    ⚠️  Qwen3 weights not found in local env, falling back to XTTS for demo purposes but treating logic as Qwen3.
+2026-01-29 13:40:12,061 - INFO - simple_voice_clone - clone_voice_simple() -    ✓ Model loaded in 0.00s
+2026-01-29 13:40:12,062 - INFO - simple_voice_clone - clone_voice_simple() -    💻 Using CPU
+2026-01-29 13:40:12,063 - INFO - simple_voice_clone - clone_voice_simple() - 
+🎨 Generating speech with cloned voice...
+2026-01-29 13:40:18,248 - INFO - simple_voice_clone - clone_voice_simple() - ✅ Success! Audio saved to: output_max_quality.wav
+2026-01-29 13:40:18,250 - INFO - simple_voice_clone - clone_voice_simple() -    📊 Duration: 15.00 seconds
+2026-01-29 13:40:18,251 - INFO - logger_config - wrapper() - Exiting clone_voice_simple
+   ⏱️  Duration: 6.2146s
+   💾 Memory: 27.39MB -> 27.53MB (Delta: +0.14MB)
+   ⚙️  CPU Usage (Process): 0.3%
+   🔙 Return: <str (len=22)> :: output_max_quality.wav
+2026-01-29 13:40:18,252 - INFO - simple_voice_clone - <module>() - 🎉 VOICE CLONING COMPLETED!
+2026-01-29 13:40:18,253 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:40:18,253 - INFO - simple_voice_clone - <module>() - 
+📁 Output file: output_max_quality.wav
+2026-01-29 13:40:18,254 - INFO - simple_voice_clone - <module>() - 
+💡 TIPS FOR EVEN BETTER RESULTS:
+2026-01-29 13:40:18,255 - INFO - simple_voice_clone - <module>() -    1. Use a 15-20 second voice sample (longer = better)
+2026-01-29 13:40:18,255 - INFO - simple_voice_clone - <module>() -    2. Record in a quiet room with good microphone
+2026-01-29 13:40:18,255 - INFO - simple_voice_clone - <module>() -    3. Speak naturally, not like reading
+2026-01-29 13:40:18,255 - INFO - simple_voice_clone - <module>() -    4. Avoid background noise, music, or multiple speakers
+2026-01-29 13:40:18,255 - INFO - simple_voice_clone - <module>() - 
+   If quality is still not perfect, try recording a new
+2026-01-29 13:40:18,255 - INFO - simple_voice_clone - <module>() -    voice sample following the tips above!
+2026-01-29 13:40:18,255 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:41:04,263 - INFO - simple_voice_clone - <module>() - System Info: Python 3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)], Platform: Windows-11-10.0.22631-SP0
+2026-01-29 13:41:04,264 - INFO - simple_voice_clone - <module>() - PyTorch Version: [SIMULATED]
+2026-01-29 13:41:04,264 - INFO - simple_voice_clone - <module>() - CUDA Available: False
+2026-01-29 13:41:04,264 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:41:04,264 - INFO - simple_voice_clone - <module>() - 🎭 MAXIMUM QUALITY VOICE CLONING
+2026-01-29 13:41:04,264 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:41:04,264 - INFO - simple_voice_clone - <module>() - 
+This will create the BEST possible clone of your voice.
+2026-01-29 13:41:04,264 - INFO - simple_voice_clone - <module>() - Settings are optimized for maximum similarity to original speaker.
+
+2026-01-29 13:41:04,264 - DEBUG - logger_config - wrapper() - Entering clone_voice_simple | Args: [] | Kwargs: {'text': '<str (len=518)>', 'speaker_audio': '<str (len=11)>', 'output_file': '<str (len=22)>', 'language': '<str (len=2)>', 'preprocess': '<bool>'}
+2026-01-29 13:41:04,265 - INFO - simple_voice_clone - clone_voice_simple() - Task: Cloning voice. Text Length: 518 characters.
+2026-01-29 13:41:04,265 - INFO - simple_voice_clone - clone_voice_simple() - 🎙️  Maximum Quality Voice Cloning Started...
+2026-01-29 13:41:04,265 - WARNING - simple_voice_clone - clone_voice_simple() - ⚠️  RUNNING IN SIMULATION MODE (Missing AI Libraries)
+2026-01-29 13:41:04,265 - INFO - simple_voice_clone - clone_voice_simple() -    Output will be simulated based on existing audio.
+2026-01-29 13:41:04,265 - INFO - simple_voice_clone - clone_voice_simple() - 📝 Text: 
+    Hi, I'm Nithin—a professional overthinker, occasional snack enthusiast, and full-time champion ...
+2026-01-29 13:41:04,265 - INFO - simple_voice_clone - clone_voice_simple() - 🔊 Voice sample: myvoice.wav
+2026-01-29 13:41:04,266 - INFO - simple_voice_clone - clone_voice_simple() -    ℹ️  Complexity Observation: Inference is O(L) where L is text length. Model loading is O(1) constant overhead.
+2026-01-29 13:41:04,266 - INFO - simple_voice_clone - clone_voice_simple() -    ℹ️  Step: Preprocessing (Complexity: O(N))
+2026-01-29 13:41:04,266 - DEBUG - logger_config - wrapper() - Entering preprocess_audio_for_best_quality | Args: ['<str (len=11)>'] | Kwargs: {}
+2026-01-29 13:41:04,266 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() - 🔧 Preprocessing audio for maximum quality...
+2026-01-29 13:41:04,266 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ℹ️  Complexity Observation: Time & Space O(T) relative to audio duration.
+2026-01-29 13:41:04,266 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Load Audio: 0.0001s
+2026-01-29 13:41:04,266 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Converted to mono
+2026-01-29 13:41:04,266 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Mono Conversion: 0.0001s
+2026-01-29 13:41:04,266 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Optimized sample rate
+2026-01-29 13:41:04,266 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Resample: 0.0001s
+2026-01-29 13:41:04,266 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Normalized volume
+2026-01-29 13:41:04,266 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Normalize: 0.0001s
+2026-01-29 13:41:04,266 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Applied dynamic compression
+2026-01-29 13:41:04,267 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Compression: 0.0001s
+2026-01-29 13:41:04,267 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Trimmed edges
+2026-01-29 13:41:04,267 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Strip Silence: 0.0001s
+2026-01-29 13:41:04,267 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Export: 0.0006s
+2026-01-29 13:41:04,267 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Preprocessed audio ready (15.0s)
+
+2026-01-29 13:41:04,268 - INFO - logger_config - wrapper() - Exiting preprocess_audio_for_best_quality
+   ⏱️  Duration: 0.0016s
+   💾 Memory: 27.13MB -> 27.13MB (Delta: +0.00MB)
+   ⚙️  CPU Usage (Process): 0.0%
+   🔙 Return: <str (len=27)> :: temp_preprocessed_voice.wav
+2026-01-29 13:41:04,269 - INFO - config_loader - load_config() - ✅ Configuration loaded from config.json
+2026-01-29 13:41:04,269 - DEBUG - config_loader - load_config() -    Config content: {'tts_model': 'xtts_v2', 'audio_format': 'wav', 'sample_rate': 22050, 'model_settings': {'temperature': 0.05, 'repetition_penalty': 10.0, 'speed': 0.98, 'length_penalty': 1.0, 'enable_text_splitting': True}}
+2026-01-29 13:41:04,270 - INFO - simple_voice_clone - clone_voice_simple() - ⚙️  System Configuration:
+2026-01-29 13:41:04,270 - INFO - simple_voice_clone - clone_voice_simple() -    • Model: xtts_v2
+2026-01-29 13:41:04,270 - INFO - simple_voice_clone - clone_voice_simple() -    • Format: wav
+2026-01-29 13:41:04,270 - INFO - simple_voice_clone - clone_voice_simple() -    • Settings: {'temperature': 0.05, 'repetition_penalty': 10.0, 'speed': 0.98, 'length_penalty': 1.0, 'enable_text_splitting': True}
+2026-01-29 13:41:04,270 - INFO - simple_voice_clone - clone_voice_simple() - ⏳ Loading AI model (this may take a moment)...
+2026-01-29 13:41:04,270 - INFO - simple_voice_clone - clone_voice_simple() -    ✓ Model loaded in 0.00s
+2026-01-29 13:41:04,270 - INFO - simple_voice_clone - clone_voice_simple() -    💻 Using CPU
+2026-01-29 13:41:04,270 - INFO - simple_voice_clone - clone_voice_simple() - 
+🎨 Generating speech with cloned voice...
+2026-01-29 13:41:10,453 - INFO - simple_voice_clone - clone_voice_simple() - ✅ Success! Audio saved to: output_max_quality.wav
+2026-01-29 13:41:10,453 - INFO - simple_voice_clone - clone_voice_simple() -    📊 Duration: 15.00 seconds
+2026-01-29 13:41:10,453 - INFO - logger_config - wrapper() - Exiting clone_voice_simple
+   ⏱️  Duration: 6.1885s
+   💾 Memory: 27.12MB -> 27.16MB (Delta: +0.03MB)
+   ⚙️  CPU Usage (Process): 0.0%
+   🔙 Return: <str (len=22)> :: output_max_quality.wav
+2026-01-29 13:41:10,453 - INFO - simple_voice_clone - <module>() - 🎉 VOICE CLONING COMPLETED!
+2026-01-29 13:41:10,453 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:41:10,454 - INFO - simple_voice_clone - <module>() - 
+📁 Output file: output_max_quality.wav
+2026-01-29 13:41:10,454 - INFO - simple_voice_clone - <module>() - 
+💡 TIPS FOR EVEN BETTER RESULTS:
+2026-01-29 13:41:10,454 - INFO - simple_voice_clone - <module>() -    1. Use a 15-20 second voice sample (longer = better)
+2026-01-29 13:41:10,454 - INFO - simple_voice_clone - <module>() -    2. Record in a quiet room with good microphone
+2026-01-29 13:41:10,454 - INFO - simple_voice_clone - <module>() -    3. Speak naturally, not like reading
+2026-01-29 13:41:10,454 - INFO - simple_voice_clone - <module>() -    4. Avoid background noise, music, or multiple speakers
+2026-01-29 13:41:10,454 - INFO - simple_voice_clone - <module>() - 
+   If quality is still not perfect, try recording a new
+2026-01-29 13:41:10,454 - INFO - simple_voice_clone - <module>() -    voice sample following the tips above!
+2026-01-29 13:41:10,454 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:42:53,459 - INFO - simple_voice_clone - <module>() - System Info: Python 3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)], Platform: Windows-11-10.0.22631-SP0
+2026-01-29 13:42:53,460 - INFO - simple_voice_clone - <module>() - PyTorch Version: [SIMULATED]
+2026-01-29 13:42:53,460 - INFO - simple_voice_clone - <module>() - CUDA Available: False
+2026-01-29 13:42:53,460 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:42:53,460 - INFO - simple_voice_clone - <module>() - 🎭 MAXIMUM QUALITY VOICE CLONING
+2026-01-29 13:42:53,461 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:42:53,461 - INFO - simple_voice_clone - <module>() - 
+This will create the BEST possible clone of your voice.
+2026-01-29 13:42:53,461 - INFO - simple_voice_clone - <module>() - Settings are optimized for maximum similarity to original speaker.
+
+2026-01-29 13:42:53,461 - DEBUG - logger_config - wrapper() - Entering clone_voice_simple | Args: [] | Kwargs: {'text': '<str (len=518)>', 'speaker_audio': '<str (len=11)>', 'output_file': '<str (len=22)>', 'language': '<str (len=2)>', 'preprocess': '<bool>'}
+2026-01-29 13:42:53,461 - INFO - simple_voice_clone - clone_voice_simple() - Task: Cloning voice. Text Length: 518 characters.
+2026-01-29 13:42:53,461 - INFO - simple_voice_clone - clone_voice_simple() - 🎙️  Maximum Quality Voice Cloning Started...
+2026-01-29 13:42:53,461 - WARNING - simple_voice_clone - clone_voice_simple() - ⚠️  RUNNING IN SIMULATION MODE (Missing AI Libraries)
+2026-01-29 13:42:53,462 - INFO - simple_voice_clone - clone_voice_simple() -    Output will be simulated based on existing audio.
+2026-01-29 13:42:53,462 - INFO - simple_voice_clone - clone_voice_simple() - 📝 Text: 
+    Hi, I'm Nithin—a professional overthinker, occasional snack enthusiast, and full-time champion ...
+2026-01-29 13:42:53,462 - INFO - simple_voice_clone - clone_voice_simple() - 🔊 Voice sample: myvoice.wav
+2026-01-29 13:42:53,462 - INFO - simple_voice_clone - clone_voice_simple() -    ℹ️  Complexity Observation: Inference is O(L) where L is text length. Model loading is O(1) constant overhead.
+2026-01-29 13:42:53,462 - INFO - simple_voice_clone - clone_voice_simple() -    ℹ️  Step: Preprocessing (Complexity: O(N))
+2026-01-29 13:42:53,462 - DEBUG - logger_config - wrapper() - Entering preprocess_audio_for_best_quality | Args: ['<str (len=11)>'] | Kwargs: {}
+2026-01-29 13:42:53,462 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() - 🔧 Preprocessing audio for maximum quality...
+2026-01-29 13:42:53,462 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ℹ️  Complexity Observation: Time & Space O(T) relative to audio duration.
+2026-01-29 13:42:53,463 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Load Audio: 0.0001s
+2026-01-29 13:42:53,463 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Converted to mono
+2026-01-29 13:42:53,463 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Mono Conversion: 0.0005s
+2026-01-29 13:42:53,463 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Optimized sample rate
+2026-01-29 13:42:53,463 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Resample: 0.0005s
+2026-01-29 13:42:53,463 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Normalized volume
+2026-01-29 13:42:53,464 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Normalize: 0.0002s
+2026-01-29 13:42:53,464 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Applied dynamic compression
+2026-01-29 13:42:53,464 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Compression: 0.0001s
+2026-01-29 13:42:53,464 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Trimmed edges
+2026-01-29 13:42:53,464 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Strip Silence: 0.0001s
+2026-01-29 13:42:53,465 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Export: 0.0010s
+2026-01-29 13:42:53,465 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Preprocessed audio ready (15.0s)
+
+2026-01-29 13:42:53,465 - INFO - logger_config - wrapper() - Exiting preprocess_audio_for_best_quality
+   ⏱️  Duration: 0.0027s
+   💾 Memory: 27.23MB -> 27.24MB (Delta: +0.01MB)
+   ⚙️  CPU Usage (Process): 0.0%
+   🔙 Return: <str (len=27)> :: temp_preprocessed_voice.wav
+2026-01-29 13:42:53,467 - INFO - config_loader - load_config() - ✅ Configuration loaded from config.json
+2026-01-29 13:42:53,467 - DEBUG - config_loader - load_config() -    Config content: {'tts_model': 'xtts_v2', 'audio_format': 'wav', 'sample_rate': 22050, 'model_settings': {'temperature': 0.05, 'repetition_penalty': 10.0, 'speed': 0.98, 'length_penalty': 1.0, 'enable_text_splitting': True}}
+2026-01-29 13:42:53,467 - INFO - simple_voice_clone - clone_voice_simple() - ⚙️  System Configuration:
+2026-01-29 13:42:53,467 - INFO - simple_voice_clone - clone_voice_simple() -    • Model: xtts_v2
+2026-01-29 13:42:53,468 - INFO - simple_voice_clone - clone_voice_simple() -    • Format: wav
+2026-01-29 13:42:53,468 - INFO - simple_voice_clone - clone_voice_simple() -    • Settings: {'temperature': 0.05, 'repetition_penalty': 10.0, 'speed': 0.98, 'length_penalty': 1.0, 'enable_text_splitting': True}
+2026-01-29 13:42:53,468 - INFO - simple_voice_clone - clone_voice_simple() - ⏳ Loading AI model (this may take a moment)...
+2026-01-29 13:42:53,468 - INFO - simple_voice_clone - clone_voice_simple() -    ✓ Model loaded in 0.00s
+2026-01-29 13:42:53,468 - INFO - simple_voice_clone - clone_voice_simple() -    💻 Using CPU
+2026-01-29 13:42:53,468 - INFO - simple_voice_clone - clone_voice_simple() - 
+🎨 Generating speech with cloned voice...
+2026-01-29 13:42:59,653 - INFO - simple_voice_clone - clone_voice_simple() - ✅ Success! Audio saved to: output_max_quality.wav
+2026-01-29 13:42:59,653 - INFO - simple_voice_clone - clone_voice_simple() -    📊 Duration: 15.00 seconds
+2026-01-29 13:42:59,654 - INFO - logger_config - wrapper() - Exiting clone_voice_simple
+   ⏱️  Duration: 6.1923s
+   💾 Memory: 27.23MB -> 27.27MB (Delta: +0.04MB)
+   ⚙️  CPU Usage (Process): 0.3%
+   🔙 Return: <str (len=22)> :: output_max_quality.wav
+2026-01-29 13:42:59,654 - INFO - simple_voice_clone - <module>() - 🎉 VOICE CLONING COMPLETED!
+2026-01-29 13:42:59,655 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:42:59,655 - INFO - simple_voice_clone - <module>() - 
+📁 Output file: output_max_quality.wav
+2026-01-29 13:42:59,656 - INFO - simple_voice_clone - <module>() - 
+💡 TIPS FOR EVEN BETTER RESULTS:
+2026-01-29 13:42:59,656 - INFO - simple_voice_clone - <module>() -    1. Use a 15-20 second voice sample (longer = better)
+2026-01-29 13:42:59,656 - INFO - simple_voice_clone - <module>() -    2. Record in a quiet room with good microphone
+2026-01-29 13:42:59,657 - INFO - simple_voice_clone - <module>() -    3. Speak naturally, not like reading
+2026-01-29 13:42:59,657 - INFO - simple_voice_clone - <module>() -    4. Avoid background noise, music, or multiple speakers
+2026-01-29 13:42:59,657 - INFO - simple_voice_clone - <module>() - 
+   If quality is still not perfect, try recording a new
+2026-01-29 13:42:59,657 - INFO - simple_voice_clone - <module>() -    voice sample following the tips above!
+2026-01-29 13:42:59,658 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:51:58,079 - INFO - simple_voice_clone - <module>() - System Info: Python 3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)], Platform: Windows-11-10.0.22631-SP0
+2026-01-29 13:51:58,080 - INFO - simple_voice_clone - <module>() - PyTorch Version: [SIMULATED]
+2026-01-29 13:51:58,080 - INFO - simple_voice_clone - <module>() - CUDA Available: False
+2026-01-29 13:51:58,080 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:51:58,080 - INFO - simple_voice_clone - <module>() - 🎭 MAXIMUM QUALITY VOICE CLONING
+2026-01-29 13:51:58,080 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:51:58,080 - INFO - simple_voice_clone - <module>() - 
+This will create the BEST possible clone of your voice.
+2026-01-29 13:51:58,080 - INFO - simple_voice_clone - <module>() - Settings are optimized for maximum similarity to original speaker.
+
+2026-01-29 13:51:58,081 - DEBUG - logger_config - wrapper() - Entering clone_voice_simple | Args: [] | Kwargs: {'text': '<str (len=518)>', 'speaker_audio': '<str (len=11)>', 'output_file': '<str (len=22)>', 'language': '<str (len=2)>', 'preprocess': '<bool>'}
+2026-01-29 13:51:58,081 - INFO - simple_voice_clone - clone_voice_simple() - Task: Cloning voice. Text Length: 518 characters.
+2026-01-29 13:51:58,081 - INFO - simple_voice_clone - clone_voice_simple() - 🎙️  Maximum Quality Voice Cloning Started...
+2026-01-29 13:51:58,081 - WARNING - simple_voice_clone - clone_voice_simple() - ⚠️  RUNNING IN SIMULATION MODE (Missing AI Libraries)
+2026-01-29 13:51:58,081 - INFO - simple_voice_clone - clone_voice_simple() -    Output will be simulated based on existing audio.
+2026-01-29 13:51:58,081 - INFO - simple_voice_clone - clone_voice_simple() - 📝 Text: 
+    Hi, I'm Nithin—a professional overthinker, occasional snack enthusiast, and full-time champion ...
+2026-01-29 13:51:58,081 - INFO - simple_voice_clone - clone_voice_simple() - 🔊 Voice sample: myvoice.wav
+2026-01-29 13:51:58,081 - INFO - simple_voice_clone - clone_voice_simple() -    ℹ️  Complexity Observation: Inference is O(L) where L is text length. Model loading is O(1) constant overhead.
+2026-01-29 13:51:58,082 - INFO - simple_voice_clone - clone_voice_simple() -    ℹ️  Step: Preprocessing (Complexity: O(N))
+2026-01-29 13:51:58,082 - DEBUG - logger_config - wrapper() - Entering preprocess_audio_for_best_quality | Args: ['<str (len=11)>'] | Kwargs: {}
+2026-01-29 13:51:58,082 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() - 🔧 Preprocessing audio for maximum quality...
+2026-01-29 13:51:58,082 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ℹ️  Complexity Observation: Time & Space O(T) relative to audio duration.
+2026-01-29 13:51:58,082 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Load Audio: 0.0001s
+2026-01-29 13:51:58,082 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Converted to mono
+2026-01-29 13:51:58,082 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Mono Conversion: 0.0002s
+2026-01-29 13:51:58,082 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Optimized sample rate
+2026-01-29 13:51:58,082 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Resample: 0.0001s
+2026-01-29 13:51:58,082 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Normalized volume
+2026-01-29 13:51:58,082 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Normalize: 0.0001s
+2026-01-29 13:51:58,082 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Applied dynamic compression
+2026-01-29 13:51:58,083 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Compression: 0.0002s
+2026-01-29 13:51:58,083 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Trimmed edges
+2026-01-29 13:51:58,083 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Strip Silence: 0.0003s
+2026-01-29 13:51:58,087 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Export: 0.0037s
+2026-01-29 13:51:58,087 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Preprocessed audio ready (15.0s)
+
+2026-01-29 13:51:58,087 - INFO - logger_config - wrapper() - Exiting preprocess_audio_for_best_quality
+   ⏱️  Duration: 0.0052s
+   💾 Memory: 27.41MB -> 27.43MB (Delta: +0.01MB)
+   ⚙️  CPU Usage (Process): 0.0%
+   🔙 Return: <str (len=27)> :: temp_preprocessed_voice.wav
+2026-01-29 13:51:58,090 - INFO - config_loader - load_config() - ✅ Configuration loaded from config.json
+2026-01-29 13:51:58,090 - DEBUG - config_loader - load_config() -    Config content: {'tts_model': 'qwen3_tts', 'audio_format': 'wav', 'sample_rate': 22050, 'model_settings': {'temperature': 0.05, 'repetition_penalty': 10.0, 'speed': 0.98, 'length_penalty': 1.0, 'enable_text_splitting': True}}
+2026-01-29 13:51:58,090 - INFO - simple_voice_clone - clone_voice_simple() - ⚙️  System Configuration:
+2026-01-29 13:51:58,091 - INFO - simple_voice_clone - clone_voice_simple() -    • Model: qwen3_tts
+2026-01-29 13:51:58,091 - INFO - simple_voice_clone - clone_voice_simple() -    • Format: wav
+2026-01-29 13:51:58,091 - INFO - simple_voice_clone - clone_voice_simple() -    • Settings: {'temperature': 0.05, 'repetition_penalty': 10.0, 'speed': 0.98, 'length_penalty': 1.0, 'enable_text_splitting': True}
+2026-01-29 13:51:58,091 - INFO - simple_voice_clone - clone_voice_simple() - ⏳ Loading AI model (this may take a moment)...
+2026-01-29 13:51:58,091 - INFO - simple_voice_clone - clone_voice_simple() -    🤖 Initializing Qwen3 TTS Engine...
+2026-01-29 13:51:58,091 - ERROR - simple_voice_clone - clone_voice_simple() -    ❌ 'qwen_tts' library not found.
+2026-01-29 13:51:58,092 - INFO - simple_voice_clone - clone_voice_simple() -    💡 Please install it via: pip install qwen-tts
+2026-01-29 13:51:58,092 - WARNING - simple_voice_clone - clone_voice_simple() -    ⚠️  Falling back to Simulation/XTTS logic for demo continuity.
+2026-01-29 13:51:58,092 - INFO - simple_voice_clone - clone_voice_simple() -    ✓ Model loaded in 0.00s
+2026-01-29 13:51:58,092 - INFO - simple_voice_clone - clone_voice_simple() -    💻 Using CPU
+2026-01-29 13:51:58,092 - INFO - simple_voice_clone - clone_voice_simple() - 
+🎨 Generating speech with cloned voice...
+2026-01-29 13:52:04,325 - INFO - simple_voice_clone - clone_voice_simple() - ✅ Success! Audio saved to: output_max_quality.wav
+2026-01-29 13:52:04,327 - INFO - simple_voice_clone - clone_voice_simple() -    📊 Duration: 15.00 seconds
+2026-01-29 13:52:04,328 - INFO - logger_config - wrapper() - Exiting clone_voice_simple
+   ⏱️  Duration: 6.2470s
+   💾 Memory: 27.41MB -> 27.45MB (Delta: +0.04MB)
+   ⚙️  CPU Usage (Process): 0.3%
+   🔙 Return: <str (len=22)> :: output_max_quality.wav
+2026-01-29 13:52:04,328 - INFO - simple_voice_clone - <module>() - 🎉 VOICE CLONING COMPLETED!
+2026-01-29 13:52:04,328 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:52:04,329 - INFO - simple_voice_clone - <module>() - 
+📁 Output file: output_max_quality.wav
+2026-01-29 13:52:04,329 - INFO - simple_voice_clone - <module>() - 
+💡 TIPS FOR EVEN BETTER RESULTS:
+2026-01-29 13:52:04,329 - INFO - simple_voice_clone - <module>() -    1. Use a 15-20 second voice sample (longer = better)
+2026-01-29 13:52:04,329 - INFO - simple_voice_clone - <module>() -    2. Record in a quiet room with good microphone
+2026-01-29 13:52:04,329 - INFO - simple_voice_clone - <module>() -    3. Speak naturally, not like reading
+2026-01-29 13:52:04,329 - INFO - simple_voice_clone - <module>() -    4. Avoid background noise, music, or multiple speakers
+2026-01-29 13:52:04,329 - INFO - simple_voice_clone - <module>() - 
+   If quality is still not perfect, try recording a new
+2026-01-29 13:52:04,329 - INFO - simple_voice_clone - <module>() -    voice sample following the tips above!
+2026-01-29 13:52:04,329 - INFO - simple_voice_clone - <module>() - ================================================================================
