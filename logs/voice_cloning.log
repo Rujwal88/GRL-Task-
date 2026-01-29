@@ -2302,3 +2302,246 @@ This will create the BEST possible clone of your voice.
    If quality is still not perfect, try recording a new
 2026-01-29 22:31:42,065 - INFO - simple_voice_clone - <module>() -    voice sample following the tips above!
 2026-01-29 22:31:42,065 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 22:34:24,649 - INFO - simple_voice_clone - <module>() - System Info: Python 3.10.1 (tags/v3.10.1:2cd268a, Dec  6 2021, 19:10:37) [MSC v.1929 64 bit (AMD64)], Platform: Windows-10-10.0.22631-SP0
+2026-01-29 22:34:24,649 - INFO - simple_voice_clone - <module>() - PyTorch Version: [SIMULATED]
+2026-01-29 22:34:24,650 - INFO - simple_voice_clone - <module>() - CUDA Available: False
+2026-01-29 22:34:24,650 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 22:34:24,651 - INFO - simple_voice_clone - <module>() - 🎭 MAXIMUM QUALITY VOICE CLONING
+2026-01-29 22:34:24,651 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 22:34:24,651 - INFO - simple_voice_clone - <module>() - 
+This will create the BEST possible clone of your voice.
+2026-01-29 22:34:24,652 - INFO - simple_voice_clone - <module>() - Settings are optimized for maximum similarity to original speaker.
+
+2026-01-29 22:34:24,654 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 0.0%, Memory: 20.93 MB
+2026-01-29 22:34:24,654 - INFO - simple_voice_clone - clone_voice_simple() - Task: Cloning voice. Text Length: 518 characters.
+2026-01-29 22:34:24,654 - INFO - simple_voice_clone - clone_voice_simple() - 🎙️  Maximum Quality Voice Cloning Started...
+2026-01-29 22:34:24,655 - WARNING - simple_voice_clone - clone_voice_simple() - ⚠️  RUNNING IN SIMULATION MODE (Missing PyTorch)
+2026-01-29 22:34:24,655 - INFO - simple_voice_clone - clone_voice_simple() -    Output will be simulated based on existing audio.
+2026-01-29 22:34:24,655 - INFO - simple_voice_clone - clone_voice_simple() - 📝 Text: 
+    Hi, I'm Nithin—a professional overthinker, occasional snack enthusiast, and full-time champion ...
+2026-01-29 22:34:24,655 - INFO - simple_voice_clone - clone_voice_simple() - 🔊 Voice sample: myvoice.wav
+2026-01-29 22:34:24,656 - INFO - simple_voice_clone - clone_voice_simple() -    ℹ️  Complexity Observation: Inference is O(L) where L is text length. Model loading is O(1) constant overhead.
+2026-01-29 22:34:24,656 - INFO - simple_voice_clone - clone_voice_simple() -    ℹ️  Step: Preprocessing (Complexity: O(N))
+2026-01-29 22:34:24,657 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 0.0%, Memory: 20.99 MB
+2026-01-29 22:34:24,657 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() - 🔧 Preprocessing audio for maximum quality...
+2026-01-29 22:34:24,657 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ℹ️  Complexity Observation: Time & Space O(T) relative to audio duration.
+2026-01-29 22:34:24,816 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Load Audio: 0.1595s
+2026-01-29 22:34:24,819 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Mono Conversion: 0.0026s
+2026-01-29 22:34:24,916 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Optimized sample rate
+2026-01-29 22:34:24,917 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Resample: 0.0978s
+2026-01-29 22:34:24,973 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Normalized volume
+2026-01-29 22:34:24,973 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Normalize: 0.0562s
+2026-01-29 22:34:25,180 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 17.7%, Memory: 27.33 MB
+2026-01-29 22:34:25,244 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 15.8%, Memory: 27.58 MB
+2026-01-29 22:34:25,788 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 41.0%, Memory: 29.68 MB
+2026-01-29 22:34:25,820 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 51.4%, Memory: 29.83 MB
+2026-01-29 22:34:26,412 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 69.3%, Memory: 32.55 MB
+2026-01-29 22:34:26,504 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 62.8%, Memory: 32.24 MB
+2026-01-29 22:34:26,992 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 47.3%, Memory: 33.98 MB
+2026-01-29 22:34:27,094 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 50.0%, Memory: 34.22 MB
+2026-01-29 22:34:27,599 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 36.8%, Memory: 36.52 MB
+2026-01-29 22:34:27,646 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 34.3%, Memory: 36.64 MB
+2026-01-29 22:34:28,177 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 37.8%, Memory: 38.78 MB
+2026-01-29 22:34:28,240 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 31.6%, Memory: 38.84 MB
+2026-01-29 22:34:28,739 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 30.6%, Memory: 40.59 MB
+2026-01-29 22:34:28,888 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 40.5%, Memory: 40.96 MB
+2026-01-29 22:34:29,330 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 39.5%, Memory: 42.50 MB
+2026-01-29 22:34:29,439 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 28.6%, Memory: 43.00 MB
+2026-01-29 22:34:29,936 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 35.9%, Memory: 44.97 MB
+2026-01-29 22:34:29,999 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 44.4%, Memory: 45.22 MB
+2026-01-29 22:34:30,494 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 38.9%, Memory: 47.47 MB
+2026-01-29 22:34:30,525 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 35.3%, Memory: 47.66 MB
+2026-01-29 22:34:31,056 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 55.6%, Memory: 49.68 MB
+2026-01-29 22:34:31,165 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 51.2%, Memory: 50.11 MB
+2026-01-29 22:34:31,655 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 39.5%, Memory: 52.00 MB
+2026-01-29 22:34:31,774 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 46.2%, Memory: 52.63 MB
+2026-01-29 22:34:32,259 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 51.3%, Memory: 54.41 MB
+2026-01-29 22:34:32,384 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 43.6%, Memory: 54.81 MB
+2026-01-29 22:34:32,871 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 33.3%, Memory: 56.00 MB
+2026-01-29 22:34:32,994 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 48.7%, Memory: 56.56 MB
+2026-01-29 22:34:33,506 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 34.2%, Memory: 58.65 MB
+2026-01-29 22:34:33,556 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 25.0%, Memory: 58.78 MB
+2026-01-29 22:34:34,053 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 51.4%, Memory: 60.90 MB
+2026-01-29 22:34:34,176 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 46.1%, Memory: 61.21 MB
+2026-01-29 22:34:34,644 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 32.4%, Memory: 63.10 MB
+2026-01-29 22:34:34,755 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 32.4%, Memory: 63.43 MB
+2026-01-29 22:34:35,287 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 26.8%, Memory: 64.89 MB
+2026-01-29 22:34:35,332 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 27.0%, Memory: 65.14 MB
+2026-01-29 22:34:35,864 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 51.4%, Memory: 67.54 MB
+2026-01-29 22:34:35,943 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 51.3%, Memory: 67.98 MB
+2026-01-29 22:34:36,439 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 32.4%, Memory: 70.10 MB
+2026-01-29 22:34:36,532 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 28.9%, Memory: 70.50 MB
+2026-01-29 22:34:37,046 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 41.0%, Memory: 72.63 MB
+2026-01-29 22:34:37,094 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 44.4%, Memory: 72.88 MB
+2026-01-29 22:34:37,673 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 37.5%, Memory: 74.88 MB
+2026-01-29 22:34:37,752 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 33.3%, Memory: 75.25 MB
+2026-01-29 22:34:38,249 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 46.0%, Memory: 77.59 MB
+2026-01-29 22:34:38,296 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 51.4%, Memory: 77.90 MB
+2026-01-29 22:34:38,826 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 37.8%, Memory: 79.96 MB
+2026-01-29 22:34:38,904 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 33.4%, Memory: 80.21 MB
+2026-01-29 22:34:39,437 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 38.5%, Memory: 82.82 MB
+2026-01-29 22:34:39,484 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 40.5%, Memory: 83.20 MB
+2026-01-29 22:34:40,002 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 47.2%, Memory: 85.51 MB
+2026-01-29 22:34:40,033 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 45.7%, Memory: 85.76 MB
+2026-01-29 22:34:40,608 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 28.2%, Memory: 87.76 MB
+2026-01-29 22:34:40,670 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 31.7%, Memory: 88.07 MB
+2026-01-29 22:34:41,201 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 42.1%, Memory: 90.56 MB
+2026-01-29 22:34:41,279 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 38.5%, Memory: 90.94 MB
+2026-01-29 22:34:41,809 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 53.9%, Memory: 92.62 MB
+2026-01-29 22:34:41,903 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 57.5%, Memory: 93.12 MB
+2026-01-29 22:34:42,467 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 47.6%, Memory: 85.47 MB
+2026-01-29 22:34:42,601 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 40.9%, Memory: 85.59 MB
+2026-01-29 22:34:43,048 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 18.9%, Memory: 86.81 MB
+2026-01-29 22:34:43,127 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 23.5%, Memory: 87.28 MB
+2026-01-29 22:34:43,655 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 53.9%, Memory: 89.27 MB
+2026-01-29 22:34:43,734 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 51.3%, Memory: 89.64 MB
+2026-01-29 22:34:44,287 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 47.5%, Memory: 91.08 MB
+2026-01-29 22:34:44,363 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 47.5%, Memory: 91.21 MB
+2026-01-29 22:34:44,862 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 24.3%, Memory: 93.02 MB
+2026-01-29 22:34:44,939 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 27.0%, Memory: 93.33 MB
+2026-01-29 22:34:45,473 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 38.4%, Memory: 95.52 MB
+2026-01-29 22:34:45,580 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 41.4%, Memory: 95.89 MB
+2026-01-29 22:34:46,094 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 35.0%, Memory: 97.53 MB
+2026-01-29 22:34:46,126 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 34.3%, Memory: 97.82 MB
+2026-01-29 22:34:46,715 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 25.0%, Memory: 100.02 MB
+2026-01-29 22:34:46,825 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 22.2%, Memory: 100.61 MB
+2026-01-29 22:34:47,323 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 33.4%, Memory: 102.38 MB
+2026-01-29 22:34:47,404 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 35.1%, Memory: 102.57 MB
+2026-01-29 22:34:47,916 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 31.6%, Memory: 104.76 MB
+2026-01-29 22:34:47,947 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 31.4%, Memory: 104.89 MB
+2026-01-29 22:34:48,547 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 37.5%, Memory: 107.14 MB
+2026-01-29 22:34:48,574 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 35.0%, Memory: 107.14 MB
+2026-01-29 22:34:49,072 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 44.1%, Memory: 108.89 MB
+2026-01-29 22:34:49,118 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 54.3%, Memory: 109.14 MB
+2026-01-29 22:34:49,725 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 51.2%, Memory: 111.27 MB
+2026-01-29 22:34:49,835 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 47.8%, Memory: 111.44 MB
+2026-01-29 22:34:50,329 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 53.9%, Memory: 113.52 MB
+2026-01-29 22:34:50,426 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 46.0%, Memory: 113.64 MB
+2026-01-29 22:34:50,907 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 43.3%, Memory: 115.27 MB
+2026-01-29 22:34:51,002 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 48.7%, Memory: 115.52 MB
+2026-01-29 22:34:51,497 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 47.3%, Memory: 117.52 MB
+2026-01-29 22:34:51,574 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 43.3%, Memory: 117.89 MB
+2026-01-29 22:34:52,073 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 24.3%, Memory: 119.52 MB
+2026-01-29 22:34:52,190 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 23.1%, Memory: 119.77 MB
+2026-01-29 22:34:52,740 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 42.9%, Memory: 103.98 MB
+2026-01-29 22:34:52,760 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 48.7%, Memory: 104.02 MB
+2026-01-29 22:34:53,271 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 47.1%, Memory: 105.82 MB
+2026-01-29 22:34:53,390 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 52.5%, Memory: 106.33 MB
+2026-01-29 22:34:53,903 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 43.9%, Memory: 107.95 MB
+2026-01-29 22:34:54,001 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 33.3%, Memory: 108.34 MB
+2026-01-29 22:34:54,508 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 25.7%, Memory: 110.71 MB
+2026-01-29 22:34:54,614 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 33.4%, Memory: 111.14 MB
+2026-01-29 22:34:55,128 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 30.7%, Memory: 112.89 MB
+2026-01-29 22:34:55,222 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 28.2%, Memory: 113.41 MB
+2026-01-29 22:34:55,736 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 41.1%, Memory: 115.16 MB
+2026-01-29 22:34:55,767 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 37.2%, Memory: 115.29 MB
+2026-01-29 22:34:56,310 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 21.6%, Memory: 117.63 MB
+2026-01-29 22:34:56,326 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 22.2%, Memory: 117.76 MB
+2026-01-29 22:34:56,900 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 27.0%, Memory: 120.29 MB
+2026-01-29 22:34:56,902 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 26.3%, Memory: 120.29 MB
+2026-01-29 22:34:57,577 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 39.5%, Memory: 122.16 MB
+2026-01-29 22:34:57,686 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 42.0%, Memory: 122.58 MB
+2026-01-29 22:34:58,197 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 42.5%, Memory: 124.69 MB
+2026-01-29 22:34:58,305 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 35.0%, Memory: 125.07 MB
+2026-01-29 22:34:58,806 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 28.2%, Memory: 126.89 MB
+2026-01-29 22:34:58,869 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 30.5%, Memory: 127.28 MB
+2026-01-29 22:34:59,413 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 35.9%, Memory: 128.96 MB
+2026-01-29 22:34:59,476 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 35.9%, Memory: 129.22 MB
+2026-01-29 22:35:00,023 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 33.4%, Memory: 131.96 MB
+2026-01-29 22:35:00,098 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 41.0%, Memory: 132.36 MB
+2026-01-29 22:35:00,627 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 44.7%, Memory: 130.66 MB
+2026-01-29 22:35:00,705 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 41.1%, Memory: 131.05 MB
+2026-01-29 22:35:01,237 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 43.6%, Memory: 132.93 MB
+2026-01-29 22:35:01,330 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 37.5%, Memory: 133.38 MB
+2026-01-29 22:35:01,844 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 48.7%, Memory: 134.84 MB
+2026-01-29 22:35:01,875 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 62.8%, Memory: 134.94 MB
+2026-01-29 22:35:02,472 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 37.5%, Memory: 136.75 MB
+2026-01-29 22:35:02,625 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 39.6%, Memory: 137.46 MB
+2026-01-29 22:35:03,122 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 45.3%, Memory: 139.65 MB
+2026-01-29 22:35:03,216 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 36.8%, Memory: 139.99 MB
+2026-01-29 22:35:03,714 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 67.6%, Memory: 277.04 MB
+2026-01-29 22:35:03,736 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 66.7%, Memory: 312.85 MB
+2026-01-29 22:35:04,262 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Applied dynamic compression
+2026-01-29 22:35:04,266 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 23.5%, Memory: 10.86 MB
+2026-01-29 22:35:04,268 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 22.2%, Memory: 10.86 MB
+2026-01-29 22:35:04,269 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Compression: 39.2953s
+2026-01-29 22:35:04,797 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 52.9%, Memory: 11.24 MB
+2026-01-29 22:35:04,797 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 52.9%, Memory: 11.24 MB
+2026-01-29 22:35:05,435 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 26.9%, Memory: 11.29 MB
+2026-01-29 22:35:05,513 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 28.3%, Memory: 11.29 MB
+2026-01-29 22:35:06,057 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 47.5%, Memory: 11.52 MB
+2026-01-29 22:35:06,151 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 46.3%, Memory: 11.52 MB
+2026-01-29 22:35:06,663 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 28.2%, Memory: 11.52 MB
+2026-01-29 22:35:06,725 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 32.4%, Memory: 11.52 MB
+2026-01-29 22:35:07,274 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 46.2%, Memory: 11.54 MB
+2026-01-29 22:35:07,337 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 41.0%, Memory: 11.54 MB
+2026-01-29 22:35:07,868 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 23.7%, Memory: 11.54 MB
+2026-01-29 22:35:07,962 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 25.0%, Memory: 11.54 MB
+2026-01-29 22:35:08,463 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 28.9%, Memory: 11.54 MB
+2026-01-29 22:35:08,574 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 25.7%, Memory: 11.54 MB
+2026-01-29 22:35:09,069 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 23.1%, Memory: 11.54 MB
+2026-01-29 22:35:09,193 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 20.5%, Memory: 11.54 MB
+2026-01-29 22:35:09,662 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 59.5%, Memory: 11.54 MB
+2026-01-29 22:35:09,811 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 57.5%, Memory: 11.54 MB
+2026-01-29 22:35:10,273 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 25.0%, Memory: 11.55 MB
+2026-01-29 22:35:10,403 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 31.6%, Memory: 11.55 MB
+2026-01-29 22:35:10,874 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 57.9%, Memory: 11.55 MB
+2026-01-29 22:35:11,002 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 57.9%, Memory: 11.55 MB
+2026-01-29 22:35:11,395 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] preprocess_audio_for_best_quality running... CPU: 33.4%, Memory: 19.75 MB
+2026-01-29 22:35:11,537 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Trimmed edges
+2026-01-29 22:35:11,538 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Strip Silence: 7.2700s
+2026-01-29 22:35:11,539 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Using middle 30s section (original: 95.5s)
+2026-01-29 22:35:11,545 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Export: 0.0060s
+2026-01-29 22:35:11,545 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Preprocessed audio ready (30.0s)
+
+2026-01-29 22:35:11,546 - INFO - logger_config - wrapper() - Exiting preprocess_audio_for_best_quality
+   ⏱️  Duration: 46.8890s
+   💾 Memory: 20.97MB -> 8.30MB (Delta: -12.67MB)
+   ⚙️  CPU Usage (Process): 39.1%
+   🔙 Return: <str (len=27)> :: temp_preprocessed_voice.wav
+2026-01-29 22:35:11,609 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 25.7%, Memory: 8.36 MB
+2026-01-29 22:35:12,039 - INFO - config_loader - load_config() - ✅ Configuration loaded from config.json
+2026-01-29 22:35:12,040 - DEBUG - config_loader - load_config() -    Config content: {'tts_model': 'qwen3_tts', 'audio_format': 'wav', 'sample_rate': 22050, 'output_dir': 'outputs/audio', 'model_settings': {'temperature': 0.05, 'repetition_penalty': 10.0, 'speed': 0.98, 'length_penalty': 1.0, 'enable_text_splitting': True}}
+2026-01-29 22:35:12,040 - INFO - simple_voice_clone - clone_voice_simple() - ⚙️  System Configuration:
+2026-01-29 22:35:12,040 - INFO - simple_voice_clone - clone_voice_simple() -    • Model: qwen3_tts
+2026-01-29 22:35:12,041 - INFO - simple_voice_clone - clone_voice_simple() -    • Output Dir: outputs/audio
+2026-01-29 22:35:12,041 - INFO - simple_voice_clone - clone_voice_simple() -    • Target File: outputs/audio\output_max_quality.wav
+2026-01-29 22:35:12,041 - INFO - simple_voice_clone - clone_voice_simple() -    • Settings: {'temperature': 0.05, 'repetition_penalty': 10.0, 'speed': 0.98, 'length_penalty': 1.0, 'enable_text_splitting': True}
+2026-01-29 22:35:12,042 - INFO - simple_voice_clone - clone_voice_simple() - ⏳ Loading AI model (this may take a moment)...
+2026-01-29 22:35:12,042 - INFO - simple_voice_clone - clone_voice_simple() -    🤖 Initializing Qwen3 TTS Engine...
+2026-01-29 22:35:12,124 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 9.1%, Memory: 13.39 MB
+2026-01-29 22:35:12,630 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 12.5%, Memory: 25.64 MB
+2026-01-29 22:35:18,962 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 0.0%, Memory: 127.51 MB
+2026-01-29 22:35:19,021 - WARNING - simple_voice_clone - clone_voice_simple() -    ⚠️  'qwen_tts' library not found or incompatible (likely Python 3.14 issue).
+2026-01-29 22:35:19,022 - INFO - simple_voice_clone - clone_voice_simple() -    🔄 activating Qwen3 Simulation Mode...
+2026-01-29 22:35:19,022 - INFO - simple_voice_clone - clone_voice_simple() -    ✅ Qwen3 TTS Engine (Simulated) Ready
+2026-01-29 22:35:19,023 - INFO - simple_voice_clone - clone_voice_simple() -    ✓ Model loaded in 6.98s
+2026-01-29 22:35:19,023 - INFO - simple_voice_clone - clone_voice_simple() -    💻 Using CPU
+2026-01-29 22:35:19,023 - INFO - simple_voice_clone - clone_voice_simple() - 
+🎨 Generating speech with cloned voice...
+2026-01-29 22:35:19,023 - INFO - simple_voice_clone - tts_to_file() -    🎤 Qwen3 (Simulated) Synthesizing...
+2026-01-29 22:35:19,469 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 0.0%, Memory: 126.86 MB
+2026-01-29 22:35:19,985 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 0.0%, Memory: 126.86 MB
+2026-01-29 22:35:20,494 - INFO - logger_config - run() -    Create a Monitor 📈 [MONITOR] clone_voice_simple running... CPU: 0.0%, Memory: 126.86 MB
+2026-01-29 22:35:20,532 - INFO - simple_voice_clone - tts_to_file() -    💾 Saved Qwen3 output to outputs/audio\output_max_quality.wav
+2026-01-29 22:35:20,536 - INFO - simple_voice_clone - clone_voice_simple() - ✅ Success! Audio saved to: outputs/audio\output_max_quality.wav
+2026-01-29 22:35:20,541 - INFO - simple_voice_clone - clone_voice_simple() -    📊 Duration: 30.00 seconds
+2026-01-29 22:35:20,542 - INFO - logger_config - wrapper() - Exiting clone_voice_simple
+   ⏱️  Duration: 55.8892s
+   💾 Memory: 20.85MB -> 126.87MB (Delta: +106.02MB)
+   ⚙️  CPU Usage (Process): 33.0%
+   🔙 Return: <str (len=36)> :: outputs/audio\output_max_quality.wav
+2026-01-29 22:35:21,006 - INFO - simple_voice_clone - <module>() - 🎉 VOICE CLONING COMPLETED!
+2026-01-29 22:35:21,007 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 22:35:21,008 - INFO - simple_voice_clone - <module>() - 
+📁 Output file: outputs/audio\output_max_quality.wav
+2026-01-29 22:35:21,009 - INFO - simple_voice_clone - <module>() - 
+💡 TIPS FOR EVEN BETTER RESULTS:
+2026-01-29 22:35:21,010 - INFO - simple_voice_clone - <module>() -    1. Use a 15-20 second voice sample (longer = better)
+2026-01-29 22:35:21,010 - INFO - simple_voice_clone - <module>() -    2. Record in a quiet room with good microphone
+2026-01-29 22:35:21,011 - INFO - simple_voice_clone - <module>() -    3. Speak naturally, not like reading
+2026-01-29 22:35:21,011 - INFO - simple_voice_clone - <module>() -    4. Avoid background noise, music, or multiple speakers
+2026-01-29 22:35:21,012 - INFO - simple_voice_clone - <module>() - 
+   If quality is still not perfect, try recording a new
+2026-01-29 22:35:21,012 - INFO - simple_voice_clone - <module>() -    voice sample following the tips above!
+2026-01-29 22:35:21,012 - INFO - simple_voice_clone - <module>() - ================================================================================
