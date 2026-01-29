@@ -3,6 +3,7 @@ import os
 import psutil
 import functools
 import time
+import threading
 from logging.handlers import RotatingFileHandler
 import sys
 
@@ -78,6 +79,39 @@ def _get_obj_info(obj):
         
     return f"<{type_name}{f' ({details})' if details else ''}>"
 
+class PerformanceMonitor(threading.Thread):
+    """
+    Background thread to monitor and log CPU/RAM usage in real-time.
+    """
+    def __init__(self, interval=0.5, func_name="Unknown"):
+        super().__init__()
+        self.interval = interval
+        self.func_name = func_name
+        self.running = True
+        self.process = psutil.Process(os.getpid())
+
+    def run(self):
+        while self.running:
+            try:
+                cpu_p = self.process.cpu_percent(interval=None) # Non-blocking
+                mem_info = self.process.memory_info()
+                mem_mb = mem_info.rss / (1024 * 1024)
+                
+                # Only log if there's significant activity or at intervals
+                # For this demo, we log every sample to prove it works
+                logger.info(
+                    f"   Create a Monitor 📈 [MONITOR] {self.func_name} running... "
+                    f"CPU: {cpu_p:.1f}% | RAM: {mem_mb:.2f}MB"
+                )
+                time.sleep(self.interval)
+            except Exception as e:
+                logger.error(f"Monitor error: {e}")
+                break
+
+    def stop(self):
+        self.running = False
+
+
 def log_performance(func):
     """
     Decorator to log:
@@ -94,54 +128,33 @@ def log_performance(func):
         # Note: cpu_percent(interval=None) returns 0.0 on first call or immediate since last call.
         # To get meaningful value for *this* function, we might need a small interval, 
         # but blocking is bad. We'll rely on process-wide stats relative to system.
-        # Calling it once here to 'reset' the counter for the next call if we wanted interval,
-        # but for instant usage, we just log what we have.
-        
-        # Better approach for CPU: Measure CPU times before and after? 
-        # Or just log system percent. Let's stick to process memory mainly and system cpu.
-        cpu_before = process.cpu_percent(interval=None) 
-        mem_before_bytes = process.memory_info().rss
-        mem_before_mb = mem_before_bytes / (1024 * 1024)
-        
-        # Analyze Arguments
-        args_details = [_get_obj_info(a) for a in args]
-        kwargs_details = {k: _get_obj_info(v) for k, v in kwargs.items()}
-        
-        logger.debug(
-            f"Entering {func.__name__} | "
-            f"Args: {args_details} | Kwargs: {kwargs_details}"
-        )
+        mem_before = process.memory_info().rss / (1024 * 1024)  # MB
         
         start_time = time.perf_counter()
         
+        # Start Real-Time Monitor
+        monitor = PerformanceMonitor(interval=0.5, func_name=func.__name__)
+        monitor.start()
+
         try:
             result = func(*args, **kwargs)
             
-            # --- POST-EXECUTION METRICS ---
+            # Format return value for logging (truncate if too long)
+            ret_val_str = str(result)
+            if len(ret_val_str) > 200:
+                ret_val_str = ret_val_str[:200] + "... (truncated)"
+            
+            # Log Exit & Performance
             end_time = time.perf_counter()
+            mem_after = process.memory_info().rss / (1024 * 1024)
             duration = end_time - start_time
-            
-            mem_after_bytes = process.memory_info().rss
-            mem_after_mb = mem_after_bytes / (1024 * 1024)
-            mem_delta_mb = mem_after_mb - mem_before_mb
-            
-            # CPU usage during this interval (approximate)
-            cpu_after = process.cpu_percent(interval=None)
-            
-            # Return value analysis
-            ret_info = _get_obj_info(result)
-            
-            # Truncate string rep for logging if it's a simple type
-            ret_str_preview = str(result)
-            if len(ret_str_preview) > 100:
-                ret_str_preview = ret_str_preview[:100] + "..."
             
             logger.info(
                 f"Exiting {func.__name__}\n"
                 f"   ⏱️  Duration: {duration:.4f}s\n"
-                f"   💾 Memory: {mem_before_mb:.2f}MB -> {mem_after_mb:.2f}MB (Delta: {mem_delta_mb:+.2f}MB)\n"
-                f"   ⚙️  CPU Usage (Process): {cpu_after:.1f}%\n"
-                f"   🔙 Return: {ret_info} :: {ret_str_preview}"
+                f"   💾 Memory: {mem_before:.2f}MB -> {mem_after:.2f}MB (Delta: {mem_after - mem_before:+.2f}MB)\n"
+                f"   ⚙️  CPU Usage (Process): {process.cpu_percent(interval=None):.1f}%\n"
+                f"   🔙 Return: {_get_obj_info(result)} :: {ret_val_str}"
             )
             
             return result
@@ -149,6 +162,10 @@ def log_performance(func):
         except Exception as e:
             logger.error(f"CRITICAL ERROR in {func.__name__}: {str(e)}", exc_info=True)
             raise
+        finally:
+            # Ensure monitor stops even if function crashes
+            monitor.stop()
+            monitor.join(timeout=1.0)
             
     return wrapper
 
