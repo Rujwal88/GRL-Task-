@@ -6,14 +6,13 @@ Optimized for most accurate voice cloning - as if the original person is speakin
 import os
 import time
 import random
+
+# --- DEPENDENCY HANDLING ---
 try:
     import torch
-    from TTS.api import TTS
-    from TTS.tts.configs import xtts_config
-    SIMULATION_MODE = False
+    TORCH_AVAILABLE = True
 except (ImportError, OSError):
-    SIMULATION_MODE = True
-    # Mocking for Simulation Mode
+    TORCH_AVAILABLE = False
     class MockCuda:
         def is_available(self): return False
         def get_device_name(self, idx): return "Simulated GPU"
@@ -26,9 +25,18 @@ except (ImportError, OSError):
         __version__ = "[SIMULATED]"
         cuda = MockCuda()
         serialization = MockSerialization()
+        # Add minimal tensor support if needed for qwen mock? 
+        # For now, qwen mock uses file ops, so safe.
     
     torch = MockTorch()
 
+try:
+    from TTS.api import TTS
+    from TTS.tts.configs import xtts_config
+    TTS_AVAILABLE = True
+except (ImportError, OSError):
+    TTS_AVAILABLE = False
+    # Mock TTS for when library is missing
     class MockTTS:
         def __init__(self, model_name=None, gpu=False):
             pass
@@ -36,24 +44,29 @@ except (ImportError, OSError):
         def tts_to_file(self, text, speaker_wav, language, file_path, **kwargs):
             # Simulate processing time
             time.sleep(1 + len(text) * 0.01) 
-            # Create a dummy output file using pydub (since we know it's installed)
+            # Create a dummy output file using pydub (since we know it's installed or mocked)
             if os.path.exists(speaker_wav):
                 try:
                     # just copy/trim the original audio to look like a result
                     orig = AudioSegment.from_file(speaker_wav)
-                    # changing pitch or speed is hard without complex logic, so just save it
                     orig.export(file_path, format="wav")
                 except:
                     # handling case where pydub might fail reading
                     with open(file_path, "wb") as f:
-                        f.write(b"RIFF....WAVE....") # minimal fake wav header? No, unsafe.
+                        f.write(b"RIFF....WAVE....") 
                         pass
-            
+    
     TTS = MockTTS
     
     class MockConfig:
         class XttsConfig: pass
     xtts_config = MockConfig()
+
+# Simulation Mode is effectively when we can't do ANY inference
+# But for Qwen, we might have torch but no TTS.
+# So SIMULATION_MODE flag is ambiguous. Let's rely on component availability.
+SIMULATION_MODE = not (TORCH_AVAILABLE and (TTS_AVAILABLE or "qwen" in "placeholder")) # Logic refined later
+
 
 try:
     from pydub import AudioSegment
@@ -191,9 +204,11 @@ def clone_voice_simple(text, speaker_audio, output_file="cloned_voice.wav", lang
     """
     logger.info(f"Task: Cloning voice. Text Length: {len(text)} characters.")
     logger.info("🎙️  Maximum Quality Voice Cloning Started...")
-    if SIMULATION_MODE:
-        logger.warning("⚠️  RUNNING IN SIMULATION MODE (Missing AI Libraries)")
+    if not TORCH_AVAILABLE:
+        logger.warning("⚠️  RUNNING IN SIMULATION MODE (Missing PyTorch)")
         logger.info("   Output will be simulated based on existing audio.")
+    elif not TTS_AVAILABLE and config.get("tts_model") == "xtts_v2":
+         logger.warning("⚠️  XTTS Library missing. Using Simulation for XTTS.")
     
     logger.info(f"📝 Text: {text[:100]}..." if len(text) > 100 else f"📝 Text: {text}")
     logger.info(f"🔊 Voice sample: {speaker_audio}")
@@ -217,21 +232,43 @@ def clone_voice_simple(text, speaker_audio, output_file="cloned_voice.wav", lang
             logger.info("   ℹ️  Using original audio\n")
             processed_audio = speaker_audio
 
-
-    # Allow XTTS config for unpickling
-    torch.serialization.add_safe_globals([xtts_config.XttsConfig])
+    text = text.strip()
+    if not text:
+        raise ValueError("Text cannot be empty")
     
+    if not os.path.exists(speaker_audio):
+        raise FileNotFoundError(f"Speaker audio not found: {speaker_audio}")
+        
     # --- CONFIGURATION LOADING ---
     from config_loader import load_config
     config = load_config()
     selected_model = config.get("tts_model", "xtts_v2")
+    output_dir = config.get("output_dir", "")
+    
+    # Handle Output Path
+    if output_dir:
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+            logger.info(f"   📂 Created output directory: {output_dir}")
+        
+        # If output_file is just a name, join with dir. If absolute, use as is (or override?)
+        # For this requirement, we enforce output_dir if configured.
+        filename = os.path.basename(output_file)
+        final_output_path = os.path.join(output_dir, filename)
+    else:
+        final_output_path = output_file
+
     model_settings = config.get("model_settings", {})
     
     logger.info(f"⚙️  System Configuration:")
     logger.info(f"   • Model: {selected_model}")
-    logger.info(f"   • Format: {config.get('audio_format', 'wav')}")
+    logger.info(f"   • Output Dir: {output_dir if output_dir else '(Current)'}")
+    logger.info(f"   • Target File: {final_output_path}")
     logger.info(f"   • Settings: {model_settings}")
-
+    
+    # Allow XTTS config for unpickling
+    torch.serialization.add_safe_globals([xtts_config.XttsConfig])
+    
     # Initialize TTS model (Factory Pattern Logic)
     logger.info("⏳ Loading AI model (this may take a moment)...")
     t_load_start = time.perf_counter()
@@ -279,17 +316,27 @@ def clone_voice_simple(text, speaker_audio, output_file="cloned_voice.wav", lang
             tts = QwenWrapper(tts)
             logger.info("   ✅ Qwen3 TTS Loaded Successfully")
 
-        except ImportError:
-            logger.error("   ❌ 'qwen_tts' library not found.")
-            logger.info("   💡 Please install it via: pip install qwen-tts")
-            logger.warning("   ⚠️  Falling back to Simulation/XTTS logic for demo continuity.")
+        except (ImportError, ModuleNotFoundError, OSError):
+            logger.warning("   ⚠️  'qwen_tts' library not found or incompatible (likely Python 3.14 issue).")
+            logger.info("   🔄 activating Qwen3 Simulation Mode...")
             
-            # Fallback to XTTS logic (or Mock) so the script doesn't crash 
-            # and the user can see the flow.
-            tts = TTS(
-                model_name="tts_models/multilingual/multi-dataset/xtts_v2",
-                gpu=use_gpu
-            )
+            class MockQwen3:
+                def tts_to_file(self, text, speaker_wav, language, file_path, **kwargs):
+                    logger.info("   🎤 Qwen3 (Simulated) Synthesizing...")
+                    time.sleep(1.5) # Simulate inference time
+                    # Copy/use the preprocessed audio as the output "clone"
+                    if os.path.exists(speaker_wav):
+                        try:
+                            # Create a dummy output or copy source
+                            with open(speaker_wav, 'rb') as src, open(file_path, 'wb') as dst:
+                                dst.write(src.read())
+                        except:
+                            with open(file_path, 'wb') as f: f.write(b"RIFF_SIMULATED_QWEN3")
+                    logger.info(f"   💾 Saved Qwen3 output to {file_path}")
+
+            tts = MockQwen3()
+            logger.info("   ✅ Qwen3 TTS Engine (Simulated) Ready")
+            
         except Exception as e:
             logger.error(f"   ❌ Error initializing Qwen3: {e}")
             raise
@@ -318,12 +365,11 @@ def clone_voice_simple(text, speaker_audio, output_file="cloned_voice.wav", lang
     spd = model_settings.get("speed", 0.98)
     len_penalty = model_settings.get("length_penalty", 1.0)
     split_text = model_settings.get("enable_text_splitting", True)
-
     tts.tts_to_file(
         text=text,
         speaker_wav=processed_audio,
         language=language,
-        file_path=output_file,
+        file_path=final_output_path,
         # Dynamic settings from config
         temperature=temp, 
         repetition_penalty=rep_penalty,
@@ -333,22 +379,13 @@ def clone_voice_simple(text, speaker_audio, output_file="cloned_voice.wav", lang
     )
 
     # Clean up temporary preprocessed file
-    if preprocess and processed_audio != speaker_audio:
-        try:
-            os.remove(processed_audio)
-        except:
-            pass
+    if os.path.exists(processed_audio) and "temp_preprocessed" in processed_audio:
+        os.remove(processed_audio)
 
-    # Get output info
-    try:
-        output_audio = AudioSegment.from_file(output_file)
-        duration = len(output_audio) / 1000.0
-        logger.info(f"✅ Success! Audio saved to: {output_file}")
-        logger.info(f"   📊 Duration: {duration:.2f} seconds")
-    except:
-        logger.info(f"\n✅ Success! Audio saved to: {output_file}")
-
-    return output_file
+    logger.info(f"✅ Success! Audio saved to: {final_output_path}")
+    logger.info(f"   📊 Duration: {len(AudioSegment.from_file(final_output_path))/1000.0:.2f} seconds")
+    
+    return final_output_path
 
 
 # Example usage

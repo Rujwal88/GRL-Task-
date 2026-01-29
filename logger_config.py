@@ -89,6 +89,8 @@ class PerformanceMonitor(threading.Thread):
         self.func_name = func_name
         self.running = True
         self.process = psutil.Process(os.getpid())
+        # Prime CPU counter to avoid 0.0% on first call
+        self.process.cpu_percent(interval=None)
 
     def run(self):
         while self.running:
@@ -100,8 +102,7 @@ class PerformanceMonitor(threading.Thread):
                 # Only log if there's significant activity or at intervals
                 # For this demo, we log every sample to prove it works
                 logger.info(
-                    f"   Create a Monitor 📈 [MONITOR] {self.func_name} running... "
-                    f"CPU: {cpu_p:.1f}% | RAM: {mem_mb:.2f}MB"
+                    f"   Create a Monitor 📈 [MONITOR] {self.func_name} running... CPU: {cpu_p:.1f}%, Memory: {mem_mb:.2f} MB"
                 )
                 time.sleep(self.interval)
             except Exception as e:
@@ -123,11 +124,10 @@ def log_performance(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         process = psutil.Process(os.getpid())
+        # Prime CPU counter to avoid 0.0% on first call
+        process.cpu_percent(interval=None)
         
         # --- PRE-EXECUTION METRICS ---
-        # Note: cpu_percent(interval=None) returns 0.0 on first call or immediate since last call.
-        # To get meaningful value for *this* function, we might need a small interval, 
-        # but blocking is bad. We'll rely on process-wide stats relative to system.
         mem_before = process.memory_info().rss / (1024 * 1024)  # MB
         
         start_time = time.perf_counter()

@@ -1,7 +1,8 @@
 {
-    "tts_model": "xtts_v2",
+    "tts_model": "qwen3_tts",
     "audio_format": "wav",
     "sample_rate": 22050,
+    "output_dir": "outputs/audio",
     "model_settings": {
         "temperature": 0.05,
         "repetition_penalty": 10.0,
