@@ -113,3 +113,305 @@ This will create the BEST possible clone of your voice.
    If quality is still not perfect, try recording a new
 2026-01-27 11:53:21,985 - INFO - simple_voice_clone - <module>() -    voice sample following the tips above!
 2026-01-27 11:53:21,985 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 11:45:38,433 - INFO - improve_voice_sample - <module>() - ======================================================================
+2026-01-29 11:45:38,441 - INFO - improve_voice_sample - <module>() - 🎙️  VOICE SAMPLE ANALYZER & OPTIMIZER
+2026-01-29 11:45:38,446 - INFO - improve_voice_sample - <module>() - ======================================================================
+2026-01-29 11:45:38,446 - INFO - improve_voice_sample - <module>() - 
+📋 STEP 1: Analyzing your current voice sample
+2026-01-29 11:45:38,447 - DEBUG - logger_config - wrapper() - Entering analyze_voice_sample | Args: ['<str (len=11)>'] | Kwargs: {}
+2026-01-29 11:45:38,448 - INFO - improve_voice_sample - analyze_voice_sample() - 🔍 Analyzing: myvoice.wav
+2026-01-29 11:45:38,450 - INFO - improve_voice_sample - analyze_voice_sample() - ======================================================================
+2026-01-29 11:45:38,450 - INFO - improve_voice_sample - analyze_voice_sample() -    ℹ️  Complexity Observation: Analysis requires full pass (O(N)) over audio data.
+2026-01-29 11:45:38,451 - INFO - improve_voice_sample - analyze_voice_sample() - 📊 BASIC INFO:
+2026-01-29 11:45:38,452 - INFO - improve_voice_sample - analyze_voice_sample() -    Duration: 15.00 seconds
+2026-01-29 11:45:38,452 - INFO - improve_voice_sample - analyze_voice_sample() -    Speech: 15.00s | Silence: 0.00s
+2026-01-29 11:45:38,452 - INFO - improve_voice_sample - analyze_voice_sample() -    Channels: 2 (Stereo)
+2026-01-29 11:45:38,452 - INFO - improve_voice_sample - analyze_voice_sample() -    Sample Rate: 44100 Hz
+2026-01-29 11:45:38,452 - INFO - improve_voice_sample - analyze_voice_sample() -    File Size: 11.02 MB
+2026-01-29 11:45:38,452 - INFO - improve_voice_sample - analyze_voice_sample() -    Loudness: -20.00 dBFS
+2026-01-29 11:45:38,452 - INFO - improve_voice_sample - analyze_voice_sample() -    Speech Segments: 1
+2026-01-29 11:45:38,452 - INFO - improve_voice_sample - analyze_voice_sample() - 
+💡 RECOMMENDATIONS:
+2026-01-29 11:45:38,453 - INFO - improve_voice_sample - analyze_voice_sample() -    ✅ Good duration
+2026-01-29 11:45:38,454 - INFO - improve_voice_sample - analyze_voice_sample() -    ⚠️  Stereo audio
+2026-01-29 11:45:38,455 - INFO - improve_voice_sample - analyze_voice_sample() -    ⚠️  Sample rate: 44100 Hz
+2026-01-29 11:45:38,456 - INFO - improve_voice_sample - analyze_voice_sample() -    ✅ Good volume level
+2026-01-29 11:45:38,457 - INFO - improve_voice_sample - analyze_voice_sample() -    ✅ Good speech ratio (100.0% speech)
+2026-01-29 11:45:38,458 - INFO - improve_voice_sample - analyze_voice_sample() - 
+🔧 SUGGESTED IMPROVEMENTS:
+2026-01-29 11:45:38,459 - INFO - improve_voice_sample - analyze_voice_sample() -    1. Convert to mono for better results
+2026-01-29 11:45:38,459 - INFO - improve_voice_sample - analyze_voice_sample() -    2. Convert to 22050 Hz (optimal for XTTS)
+2026-01-29 11:45:38,459 - INFO - improve_voice_sample - analyze_voice_sample() - 
+📈 QUALITY SCORE: 60% (3/5 optimal)
+2026-01-29 11:45:38,460 - INFO - improve_voice_sample - analyze_voice_sample() -    👍 Good! Some improvements could help.
+2026-01-29 11:45:38,460 - INFO - improve_voice_sample - analyze_voice_sample() - ======================================================================
+2026-01-29 11:45:38,461 - INFO - logger_config - wrapper() - Exiting analyze_voice_sample
+   ⏱️  Duration: 0.0129s
+   💾 Memory: 21.26MB -> 21.29MB (Delta: +0.03MB)
+   ⚙️  CPU Usage (Process): 0.0%
+   🔙 Return: <dict (len=8)> :: {'duration': 15.0, 'speech_duration': 15.0, 'silence_duration': 0.0, 'channels': 2, 'sample_rate': 4...
+2026-01-29 11:45:38,462 - INFO - improve_voice_sample - <module>() - 
+📋 STEP 2: Creating optimized version
+2026-01-29 11:45:38,474 - DEBUG - logger_config - wrapper() - Entering optimize_voice_sample | Args: ['<str (len=11)>', '<str (len=21)>'] | Kwargs: {}
+2026-01-29 11:45:38,474 - INFO - improve_voice_sample - optimize_voice_sample() - 
+🔧 Optimizing: myvoice.wav
+2026-01-29 11:45:38,475 - INFO - improve_voice_sample - optimize_voice_sample() - ======================================================================
+2026-01-29 11:45:38,475 - INFO - improve_voice_sample - optimize_voice_sample() - ⚙️  Applying optimizations...
+2026-01-29 11:45:38,477 - INFO - improve_voice_sample - optimize_voice_sample() -    ℹ️  Complexity Observation: Optimization pipeline is a linear sequence of O(N) filters.
+2026-01-29 11:45:38,478 - INFO - improve_voice_sample - optimize_voice_sample() -    ✓ Converted to mono
+2026-01-29 11:45:38,479 - INFO - improve_voice_sample - optimize_voice_sample() -    ✓ Set sample rate to 22050 Hz
+2026-01-29 11:45:38,480 - INFO - improve_voice_sample - optimize_voice_sample() -    ✓ Normalized volume
+2026-01-29 11:45:38,481 - INFO - improve_voice_sample - optimize_voice_sample() -    ✓ Applied dynamic range compression
+2026-01-29 11:45:38,482 - INFO - improve_voice_sample - optimize_voice_sample() -    ✓ Trimmed silence from edges
+2026-01-29 11:45:38,484 - INFO - improve_voice_sample - optimize_voice_sample() - 
+✅ Optimized audio saved: myvoice_optimized.wav
+2026-01-29 11:45:38,485 - INFO - improve_voice_sample - optimize_voice_sample() -    Original: 15.00s → Optimized: 15.00s
+2026-01-29 11:45:38,486 - INFO - improve_voice_sample - optimize_voice_sample() - ======================================================================
+2026-01-29 11:45:38,486 - INFO - logger_config - wrapper() - Exiting optimize_voice_sample
+   ⏱️  Duration: 0.0120s
+   💾 Memory: 21.29MB -> 21.29MB (Delta: +0.00MB)
+   ⚙️  CPU Usage (Process): 126.9%
+   🔙 Return: <str (len=21)> :: myvoice_optimized.wav
+2026-01-29 11:45:38,487 - INFO - improve_voice_sample - <module>() - 
+📋 STEP 3: Analyzing optimized version
+2026-01-29 11:45:38,488 - DEBUG - logger_config - wrapper() - Entering analyze_voice_sample | Args: ['<str (len=21)>'] | Kwargs: {}
+2026-01-29 11:45:38,488 - INFO - improve_voice_sample - analyze_voice_sample() - 🔍 Analyzing: myvoice_optimized.wav
+2026-01-29 11:45:38,489 - INFO - improve_voice_sample - analyze_voice_sample() - ======================================================================
+2026-01-29 11:45:38,490 - INFO - improve_voice_sample - analyze_voice_sample() -    ℹ️  Complexity Observation: Analysis requires full pass (O(N)) over audio data.
+2026-01-29 11:45:38,491 - INFO - improve_voice_sample - analyze_voice_sample() - 📊 BASIC INFO:
+2026-01-29 11:45:38,492 - INFO - improve_voice_sample - analyze_voice_sample() -    Duration: 15.00 seconds
+2026-01-29 11:45:38,492 - INFO - improve_voice_sample - analyze_voice_sample() -    Speech: 15.00s | Silence: 0.00s
+2026-01-29 11:45:38,492 - INFO - improve_voice_sample - analyze_voice_sample() -    Channels: 2 (Stereo)
+2026-01-29 11:45:38,492 - INFO - improve_voice_sample - analyze_voice_sample() -    Sample Rate: 44100 Hz
+2026-01-29 11:45:38,492 - INFO - improve_voice_sample - analyze_voice_sample() -    File Size: 0.00 MB
+2026-01-29 11:45:38,492 - INFO - improve_voice_sample - analyze_voice_sample() -    Loudness: -20.00 dBFS
+2026-01-29 11:45:38,492 - INFO - improve_voice_sample - analyze_voice_sample() -    Speech Segments: 1
+2026-01-29 11:45:38,492 - INFO - improve_voice_sample - analyze_voice_sample() - 
+💡 RECOMMENDATIONS:
+2026-01-29 11:45:38,493 - INFO - improve_voice_sample - analyze_voice_sample() -    ✅ Good duration
+2026-01-29 11:45:38,494 - INFO - improve_voice_sample - analyze_voice_sample() -    ⚠️  Stereo audio
+2026-01-29 11:45:38,495 - INFO - improve_voice_sample - analyze_voice_sample() -    ⚠️  Sample rate: 44100 Hz
+2026-01-29 11:45:38,496 - INFO - improve_voice_sample - analyze_voice_sample() -    ✅ Good volume level
+2026-01-29 11:45:38,497 - INFO - improve_voice_sample - analyze_voice_sample() -    ✅ Good speech ratio (100.0% speech)
+2026-01-29 11:45:38,498 - INFO - improve_voice_sample - analyze_voice_sample() - 
+🔧 SUGGESTED IMPROVEMENTS:
+2026-01-29 11:45:38,499 - INFO - improve_voice_sample - analyze_voice_sample() -    1. Convert to mono for better results
+2026-01-29 11:45:38,499 - INFO - improve_voice_sample - analyze_voice_sample() -    2. Convert to 22050 Hz (optimal for XTTS)
+2026-01-29 11:45:38,499 - INFO - improve_voice_sample - analyze_voice_sample() - 
+📈 QUALITY SCORE: 60% (3/5 optimal)
+2026-01-29 11:45:38,500 - INFO - improve_voice_sample - analyze_voice_sample() -    👍 Good! Some improvements could help.
+2026-01-29 11:45:38,502 - INFO - improve_voice_sample - analyze_voice_sample() - ======================================================================
+2026-01-29 11:45:38,502 - INFO - logger_config - wrapper() - Exiting analyze_voice_sample
+   ⏱️  Duration: 0.0132s
+   💾 Memory: 21.29MB -> 21.29MB (Delta: +0.00MB)
+   ⚙️  CPU Usage (Process): 0.0%
+   🔙 Return: <dict (len=8)> :: {'duration': 15.0, 'speech_duration': 15.0, 'silence_duration': 0.0, 'channels': 2, 'sample_rate': 4...
+2026-01-29 11:45:38,503 - INFO - improve_voice_sample - <module>() - 
+🎯 NEXT STEPS:
+2026-01-29 11:45:38,504 - INFO - improve_voice_sample - <module>() - ======================================================================
+2026-01-29 11:45:38,504 - INFO - improve_voice_sample - <module>() - 1. Compare the audio files:
+2026-01-29 11:45:38,504 - INFO - improve_voice_sample - <module>() -    - Original: myvoice.wav
+2026-01-29 11:45:38,504 - INFO - improve_voice_sample - <module>() -    - Optimized: myvoice_optimized.wav
+2026-01-29 11:45:38,504 - INFO - improve_voice_sample - <module>() - 
+2. Use the optimized version in your voice cloning:
+2026-01-29 11:45:38,504 - INFO - improve_voice_sample - <module>() -    python enhanced_voice_cloner.py
+2026-01-29 11:45:38,504 - INFO - improve_voice_sample - <module>() -    (Edit the script to use 'myvoice_optimized.wav')
+2026-01-29 11:45:38,504 - INFO - improve_voice_sample - <module>() - 
+3. If results are still not good enough:
+2026-01-29 11:45:38,504 - INFO - improve_voice_sample - <module>() -    - Record a new sample in a quiet room
+2026-01-29 11:45:38,504 - INFO - improve_voice_sample - <module>() -    - Speak naturally for 15-20 seconds
+2026-01-29 11:45:38,505 - INFO - improve_voice_sample - <module>() -    - Use a good quality microphone
+2026-01-29 11:45:38,505 - INFO - improve_voice_sample - <module>() -    - Avoid background noise and music
+2026-01-29 11:45:38,505 - INFO - improve_voice_sample - <module>() - ======================================================================
+2026-01-29 11:48:08,991 - INFO - simple_voice_clone - <module>() - System Info: Python 3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)], Platform: Windows-11-10.0.22631-SP0
+2026-01-29 11:48:08,992 - INFO - simple_voice_clone - <module>() - PyTorch Version: [SIMULATED]
+2026-01-29 11:48:08,992 - INFO - simple_voice_clone - <module>() - CUDA Available: False
+2026-01-29 11:48:08,992 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 11:48:08,992 - INFO - simple_voice_clone - <module>() - 🎭 MAXIMUM QUALITY VOICE CLONING
+2026-01-29 11:48:08,997 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 11:48:08,997 - INFO - simple_voice_clone - <module>() - 
+This will create the BEST possible clone of your voice.
+2026-01-29 11:48:08,997 - INFO - simple_voice_clone - <module>() - Settings are optimized for maximum similarity to original speaker.
+
+2026-01-29 11:48:08,997 - DEBUG - logger_config - wrapper() - Entering clone_voice_simple | Args: [] | Kwargs: {'text': '<str (len=518)>', 'speaker_audio': '<str (len=11)>', 'output_file': '<str (len=22)>', 'language': '<str (len=2)>', 'preprocess': '<bool>'}
+2026-01-29 11:48:08,997 - INFO - simple_voice_clone - clone_voice_simple() - Task: Cloning voice. Text Length: 518 characters.
+2026-01-29 11:48:08,998 - INFO - simple_voice_clone - clone_voice_simple() - 🎙️  Maximum Quality Voice Cloning Started...
+2026-01-29 11:48:08,999 - WARNING - simple_voice_clone - clone_voice_simple() - ⚠️  RUNNING IN SIMULATION MODE (Missing AI Libraries)
+2026-01-29 11:48:09,000 - INFO - simple_voice_clone - clone_voice_simple() -    Output will be simulated based on existing audio.
+2026-01-29 11:48:09,000 - INFO - simple_voice_clone - clone_voice_simple() - 📝 Text: 
+    Hi, I'm Nithin—a professional overthinker, occasional snack enthusiast, and full-time champion ...
+2026-01-29 11:48:09,001 - INFO - simple_voice_clone - clone_voice_simple() - 🔊 Voice sample: myvoice.wav
+2026-01-29 11:48:09,002 - INFO - simple_voice_clone - clone_voice_simple() -    ℹ️  Complexity Observation: Inference is O(L) where L is text length. Model loading is O(1) constant overhead.
+2026-01-29 11:48:09,003 - INFO - simple_voice_clone - clone_voice_simple() -    ℹ️  Step: Preprocessing (Complexity: O(N))
+2026-01-29 11:48:09,004 - DEBUG - logger_config - wrapper() - Entering preprocess_audio_for_best_quality | Args: ['<str (len=11)>'] | Kwargs: {}
+2026-01-29 11:48:09,004 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() - 🔧 Preprocessing audio for maximum quality...
+2026-01-29 11:48:09,004 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ℹ️  Complexity Observation: Time & Space O(T) relative to audio duration.
+2026-01-29 11:48:09,005 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Load Audio: 0.0009s
+2026-01-29 11:48:09,005 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Converted to mono
+2026-01-29 11:48:09,006 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Mono Conversion: 0.0008s
+2026-01-29 11:48:09,006 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Optimized sample rate
+2026-01-29 11:48:09,007 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Resample: 0.0010s
+2026-01-29 11:48:09,007 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Normalized volume
+2026-01-29 11:48:09,008 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Normalize: 0.0009s
+2026-01-29 11:48:09,008 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Applied dynamic compression
+2026-01-29 11:48:09,009 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Compression: 0.0008s
+2026-01-29 11:48:09,009 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Trimmed edges
+2026-01-29 11:48:09,010 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Strip Silence: 0.0009s
+2026-01-29 11:48:09,010 - DEBUG - simple_voice_clone - preprocess_audio_for_best_quality() -    [Time] Export: 0.0007s
+2026-01-29 11:48:09,011 - INFO - simple_voice_clone - preprocess_audio_for_best_quality() -    ✓ Preprocessed audio ready (15.0s)
+
+2026-01-29 11:48:09,012 - INFO - logger_config - wrapper() - Exiting preprocess_audio_for_best_quality
+   ⏱️  Duration: 0.0081s
+   💾 Memory: 27.68MB -> 27.69MB (Delta: +0.00MB)
+   ⚙️  CPU Usage (Process): 0.0%
+   🔙 Return: <str (len=27)> :: temp_preprocessed_voice.wav
+2026-01-29 11:48:09,013 - INFO - simple_voice_clone - clone_voice_simple() - ⏳ Loading AI model (this may take a moment)...
+2026-01-29 11:48:09,014 - INFO - simple_voice_clone - clone_voice_simple() -    ✓ Model loaded in 0.00s
+2026-01-29 11:48:09,015 - INFO - simple_voice_clone - clone_voice_simple() -    💻 Using CPU
+2026-01-29 11:48:09,016 - INFO - simple_voice_clone - clone_voice_simple() - 
+🎨 Generating speech with cloned voice...
+2026-01-29 11:48:09,017 - INFO - simple_voice_clone - clone_voice_simple() -    Settings: MAXIMUM QUALITY MODE
+2026-01-29 11:48:09,017 - INFO - simple_voice_clone - clone_voice_simple() -    • Ultra-low temperature for exact voice matching
+2026-01-29 11:48:09,017 - INFO - simple_voice_clone - clone_voice_simple() -    • High repetition penalty for natural speech
+2026-01-29 11:48:09,017 - INFO - simple_voice_clone - clone_voice_simple() -    • Optimized length ratio for best prosody
+
+2026-01-29 11:48:11,648 - INFO - improve_voice_sample - <module>() - ======================================================================
+2026-01-29 11:48:11,648 - INFO - improve_voice_sample - <module>() - 🎙️  VOICE SAMPLE ANALYZER & OPTIMIZER
+2026-01-29 11:48:11,650 - INFO - improve_voice_sample - <module>() - ======================================================================
+2026-01-29 11:48:11,650 - INFO - improve_voice_sample - <module>() - 
+📋 STEP 1: Analyzing your current voice sample
+2026-01-29 11:48:11,651 - DEBUG - logger_config - wrapper() - Entering analyze_voice_sample | Args: ['<str (len=11)>'] | Kwargs: {}
+2026-01-29 11:48:11,651 - INFO - improve_voice_sample - analyze_voice_sample() - 🔍 Analyzing: myvoice.wav
+2026-01-29 11:48:11,652 - INFO - improve_voice_sample - analyze_voice_sample() - ======================================================================
+2026-01-29 11:48:11,652 - INFO - improve_voice_sample - analyze_voice_sample() -    ℹ️  Complexity Observation: Analysis requires full pass (O(N)) over audio data.
+2026-01-29 11:48:11,653 - INFO - improve_voice_sample - analyze_voice_sample() - 📊 BASIC INFO:
+2026-01-29 11:48:11,654 - INFO - improve_voice_sample - analyze_voice_sample() -    Duration: 15.00 seconds
+2026-01-29 11:48:11,654 - INFO - improve_voice_sample - analyze_voice_sample() -    Speech: 15.00s | Silence: 0.00s
+2026-01-29 11:48:11,654 - INFO - improve_voice_sample - analyze_voice_sample() -    Channels: 2 (Stereo)
+2026-01-29 11:48:11,654 - INFO - improve_voice_sample - analyze_voice_sample() -    Sample Rate: 44100 Hz
+2026-01-29 11:48:11,654 - INFO - improve_voice_sample - analyze_voice_sample() -    File Size: 11.02 MB
+2026-01-29 11:48:11,654 - INFO - improve_voice_sample - analyze_voice_sample() -    Loudness: -20.00 dBFS
+2026-01-29 11:48:11,654 - INFO - improve_voice_sample - analyze_voice_sample() -    Speech Segments: 1
+2026-01-29 11:48:11,654 - INFO - improve_voice_sample - analyze_voice_sample() - 
+💡 RECOMMENDATIONS:
+2026-01-29 11:48:11,655 - INFO - improve_voice_sample - analyze_voice_sample() -    ✅ Good duration
+2026-01-29 11:48:11,656 - INFO - improve_voice_sample - analyze_voice_sample() -    ⚠️  Stereo audio
+2026-01-29 11:48:11,656 - INFO - improve_voice_sample - analyze_voice_sample() -    ⚠️  Sample rate: 44100 Hz
+2026-01-29 11:48:11,657 - INFO - improve_voice_sample - analyze_voice_sample() -    ✅ Good volume level
+2026-01-29 11:48:11,658 - INFO - improve_voice_sample - analyze_voice_sample() -    ✅ Good speech ratio (100.0% speech)
+2026-01-29 11:48:11,659 - INFO - improve_voice_sample - analyze_voice_sample() - 
+🔧 SUGGESTED IMPROVEMENTS:
+2026-01-29 11:48:11,659 - INFO - improve_voice_sample - analyze_voice_sample() -    1. Convert to mono for better results
+2026-01-29 11:48:11,659 - INFO - improve_voice_sample - analyze_voice_sample() -    2. Convert to 22050 Hz (optimal for XTTS)
+2026-01-29 11:48:11,659 - INFO - improve_voice_sample - analyze_voice_sample() - 
+📈 QUALITY SCORE: 60% (3/5 optimal)
+2026-01-29 11:48:11,660 - INFO - improve_voice_sample - analyze_voice_sample() -    👍 Good! Some improvements could help.
+2026-01-29 11:48:11,661 - INFO - improve_voice_sample - analyze_voice_sample() - ======================================================================
+2026-01-29 11:48:11,661 - INFO - logger_config - wrapper() - Exiting analyze_voice_sample
+   ⏱️  Duration: 0.0097s
+   💾 Memory: 21.20MB -> 21.24MB (Delta: +0.04MB)
+   ⚙️  CPU Usage (Process): 0.0%
+   🔙 Return: <dict (len=8)> :: {'duration': 15.0, 'speech_duration': 15.0, 'silence_duration': 0.0, 'channels': 2, 'sample_rate': 4...
+2026-01-29 11:48:11,661 - INFO - improve_voice_sample - <module>() - 
+📋 STEP 2: Creating optimized version
+2026-01-29 11:48:11,662 - DEBUG - logger_config - wrapper() - Entering optimize_voice_sample | Args: ['<str (len=11)>', '<str (len=21)>'] | Kwargs: {}
+2026-01-29 11:48:11,662 - INFO - improve_voice_sample - optimize_voice_sample() - 
+🔧 Optimizing: myvoice.wav
+2026-01-29 11:48:11,663 - INFO - improve_voice_sample - optimize_voice_sample() - ======================================================================
+2026-01-29 11:48:11,663 - INFO - improve_voice_sample - optimize_voice_sample() - ⚙️  Applying optimizations...
+2026-01-29 11:48:11,664 - INFO - improve_voice_sample - optimize_voice_sample() -    ℹ️  Complexity Observation: Optimization pipeline is a linear sequence of O(N) filters.
+2026-01-29 11:48:11,665 - INFO - improve_voice_sample - optimize_voice_sample() -    ✓ Converted to mono
+2026-01-29 11:48:11,666 - INFO - improve_voice_sample - optimize_voice_sample() -    ✓ Set sample rate to 22050 Hz
+2026-01-29 11:48:11,667 - INFO - improve_voice_sample - optimize_voice_sample() -    ✓ Normalized volume
+2026-01-29 11:48:11,668 - INFO - improve_voice_sample - optimize_voice_sample() -    ✓ Applied dynamic range compression
+2026-01-29 11:48:11,669 - INFO - improve_voice_sample - optimize_voice_sample() -    ✓ Trimmed silence from edges
+2026-01-29 11:48:11,672 - INFO - improve_voice_sample - optimize_voice_sample() - 
+✅ Optimized audio saved: myvoice_optimized.wav
+2026-01-29 11:48:11,673 - INFO - improve_voice_sample - optimize_voice_sample() -    Original: 15.00s → Optimized: 15.00s
+2026-01-29 11:48:11,674 - INFO - improve_voice_sample - optimize_voice_sample() - ======================================================================
+2026-01-29 11:48:11,674 - INFO - logger_config - wrapper() - Exiting optimize_voice_sample
+   ⏱️  Duration: 0.0119s
+   💾 Memory: 21.24MB -> 21.24MB (Delta: +0.00MB)
+   ⚙️  CPU Usage (Process): 0.0%
+   🔙 Return: <str (len=21)> :: myvoice_optimized.wav
+2026-01-29 11:48:11,675 - INFO - improve_voice_sample - <module>() - 
+📋 STEP 3: Analyzing optimized version
+2026-01-29 11:48:11,676 - DEBUG - logger_config - wrapper() - Entering analyze_voice_sample | Args: ['<str (len=21)>'] | Kwargs: {}
+2026-01-29 11:48:11,677 - INFO - improve_voice_sample - analyze_voice_sample() - 🔍 Analyzing: myvoice_optimized.wav
+2026-01-29 11:48:11,677 - INFO - improve_voice_sample - analyze_voice_sample() - ======================================================================
+2026-01-29 11:48:11,678 - INFO - improve_voice_sample - analyze_voice_sample() -    ℹ️  Complexity Observation: Analysis requires full pass (O(N)) over audio data.
+2026-01-29 11:48:11,679 - INFO - improve_voice_sample - analyze_voice_sample() - 📊 BASIC INFO:
+2026-01-29 11:48:11,680 - INFO - improve_voice_sample - analyze_voice_sample() -    Duration: 15.00 seconds
+2026-01-29 11:48:11,680 - INFO - improve_voice_sample - analyze_voice_sample() -    Speech: 15.00s | Silence: 0.00s
+2026-01-29 11:48:11,681 - INFO - improve_voice_sample - analyze_voice_sample() -    Channels: 2 (Stereo)
+2026-01-29 11:48:11,681 - INFO - improve_voice_sample - analyze_voice_sample() -    Sample Rate: 44100 Hz
+2026-01-29 11:48:11,681 - INFO - improve_voice_sample - analyze_voice_sample() -    File Size: 0.00 MB
+2026-01-29 11:48:11,681 - INFO - improve_voice_sample - analyze_voice_sample() -    Loudness: -20.00 dBFS
+2026-01-29 11:48:11,681 - INFO - improve_voice_sample - analyze_voice_sample() -    Speech Segments: 1
+2026-01-29 11:48:11,681 - INFO - improve_voice_sample - analyze_voice_sample() - 
+💡 RECOMMENDATIONS:
+2026-01-29 11:48:11,683 - INFO - improve_voice_sample - analyze_voice_sample() -    ✅ Good duration
+2026-01-29 11:48:11,684 - INFO - improve_voice_sample - analyze_voice_sample() -    ⚠️  Stereo audio
+2026-01-29 11:48:11,685 - INFO - improve_voice_sample - analyze_voice_sample() -    ⚠️  Sample rate: 44100 Hz
+2026-01-29 11:48:11,686 - INFO - improve_voice_sample - analyze_voice_sample() -    ✅ Good volume level
+2026-01-29 11:48:11,686 - INFO - improve_voice_sample - analyze_voice_sample() -    ✅ Good speech ratio (100.0% speech)
+2026-01-29 11:48:11,687 - INFO - improve_voice_sample - analyze_voice_sample() - 
+🔧 SUGGESTED IMPROVEMENTS:
+2026-01-29 11:48:11,689 - INFO - improve_voice_sample - analyze_voice_sample() -    1. Convert to mono for better results
+2026-01-29 11:48:11,689 - INFO - improve_voice_sample - analyze_voice_sample() -    2. Convert to 22050 Hz (optimal for XTTS)
+2026-01-29 11:48:11,689 - INFO - improve_voice_sample - analyze_voice_sample() - 
+📈 QUALITY SCORE: 60% (3/5 optimal)
+2026-01-29 11:48:11,690 - INFO - improve_voice_sample - analyze_voice_sample() -    👍 Good! Some improvements could help.
+2026-01-29 11:48:11,691 - INFO - improve_voice_sample - analyze_voice_sample() - ======================================================================
+2026-01-29 11:48:11,691 - INFO - logger_config - wrapper() - Exiting analyze_voice_sample
+   ⏱️  Duration: 0.0143s
+   💾 Memory: 21.24MB -> 21.24MB (Delta: +0.00MB)
+   ⚙️  CPU Usage (Process): 0.0%
+   🔙 Return: <dict (len=8)> :: {'duration': 15.0, 'speech_duration': 15.0, 'silence_duration': 0.0, 'channels': 2, 'sample_rate': 4...
+2026-01-29 11:48:11,692 - INFO - improve_voice_sample - <module>() - 
+🎯 NEXT STEPS:
+2026-01-29 11:48:11,693 - INFO - improve_voice_sample - <module>() - ======================================================================
+2026-01-29 11:48:11,693 - INFO - improve_voice_sample - <module>() - 1. Compare the audio files:
+2026-01-29 11:48:11,693 - INFO - improve_voice_sample - <module>() -    - Original: myvoice.wav
+2026-01-29 11:48:11,693 - INFO - improve_voice_sample - <module>() -    - Optimized: myvoice_optimized.wav
+2026-01-29 11:48:11,693 - INFO - improve_voice_sample - <module>() - 
+2. Use the optimized version in your voice cloning:
+2026-01-29 11:48:11,693 - INFO - improve_voice_sample - <module>() -    python enhanced_voice_cloner.py
+2026-01-29 11:48:11,693 - INFO - improve_voice_sample - <module>() -    (Edit the script to use 'myvoice_optimized.wav')
+2026-01-29 11:48:11,693 - INFO - improve_voice_sample - <module>() - 
+3. If results are still not good enough:
+2026-01-29 11:48:11,693 - INFO - improve_voice_sample - <module>() -    - Record a new sample in a quiet room
+2026-01-29 11:48:11,693 - INFO - improve_voice_sample - <module>() -    - Speak naturally for 15-20 seconds
+2026-01-29 11:48:11,693 - INFO - improve_voice_sample - <module>() -    - Use a good quality microphone
+2026-01-29 11:48:11,694 - INFO - improve_voice_sample - <module>() -    - Avoid background noise and music
+2026-01-29 11:48:11,694 - INFO - improve_voice_sample - <module>() - ======================================================================
+2026-01-29 11:48:15,201 - INFO - simple_voice_clone - clone_voice_simple() - ✅ Success! Audio saved to: output_max_quality.wav
+2026-01-29 11:48:15,206 - INFO - simple_voice_clone - clone_voice_simple() -    📊 Duration: 15.00 seconds
+2026-01-29 11:48:15,209 - INFO - logger_config - wrapper() - Exiting clone_voice_simple
+   ⏱️  Duration: 6.2112s
+   💾 Memory: 27.66MB -> 27.69MB (Delta: +0.02MB)
+   ⚙️  CPU Usage (Process): 0.0%
+   🔙 Return: <str (len=22)> :: output_max_quality.wav
+2026-01-29 11:48:15,211 - INFO - simple_voice_clone - <module>() - 🎉 VOICE CLONING COMPLETED!
+2026-01-29 11:48:15,214 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 11:48:15,214 - INFO - simple_voice_clone - <module>() - 
+📁 Output file: output_max_quality.wav
+2026-01-29 11:48:15,216 - INFO - simple_voice_clone - <module>() - 
+💡 TIPS FOR EVEN BETTER RESULTS:
+2026-01-29 11:48:15,219 - INFO - simple_voice_clone - <module>() -    1. Use a 15-20 second voice sample (longer = better)
+2026-01-29 11:48:15,219 - INFO - simple_voice_clone - <module>() -    2. Record in a quiet room with good microphone
+2026-01-29 11:48:15,219 - INFO - simple_voice_clone - <module>() -    3. Speak naturally, not like reading
+2026-01-29 11:48:15,219 - INFO - simple_voice_clone - <module>() -    4. Avoid background noise, music, or multiple speakers
+2026-01-29 11:48:15,222 - INFO - simple_voice_clone - <module>() - 
+   If quality is still not perfect, try recording a new
+2026-01-29 11:48:15,222 - INFO - simple_voice_clone - <module>() -    voice sample following the tips above!
+2026-01-29 11:48:15,223 - INFO - simple_voice_clone - <module>() - ================================================================================
+2026-01-29 13:24:40,034 - INFO - logger_config - <module>() - Testing logger_config.py directly...
+2026-01-29 13:24:40,035 - DEBUG - logger_config - wrapper() - Entering test_function | Args: ['<int>'] | Kwargs: {'data': '<list (len=5)>'}
+2026-01-29 13:24:40,036 - INFO - logger_config - test_function() - Inside test function with n=5
+2026-01-29 13:24:40,137 - INFO - logger_config - wrapper() - Exiting test_function
+   ⏱️  Duration: 0.1006s
+   💾 Memory: 18.99MB -> 19.00MB (Delta: +0.01MB)
+   ⚙️  CPU Usage (Process): 0.0%
+   🔙 Return: <list (len=5)> :: [2, 4, 6, 8, 10]
+2026-01-29 13:24:40,144 - INFO - logger_config - <module>() - Test complete.

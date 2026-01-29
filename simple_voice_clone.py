@@ -108,6 +108,9 @@ def preprocess_audio_for_best_quality(speaker_audio):
     # Timing
     t0 = time.perf_counter()
 
+    # Complexity: O(T) where T is duration of audio. Memory: O(T) to load waveform.
+    logger.info("   ℹ️  Complexity Observation: Time & Space O(T) relative to audio duration.")
+
     # Load audio
     audio = AudioSegment.from_file(speaker_audio)
     t1 = time.perf_counter()
@@ -201,6 +204,7 @@ def clone_voice_simple(text, speaker_audio, output_file="cloned_voice.wav", lang
 
     # Complexity Analysis: Audio preprocessing is roughly O(N) on sample duration.
     # Current sample duration: ~{len(audio)/1000}s
+    logger.info("   ℹ️  Complexity Observation: Inference is O(L) where L is text length. Model loading is O(1) constant overhead.")
     
     # Preprocess audio for best quality
     processed_audio = speaker_audio
