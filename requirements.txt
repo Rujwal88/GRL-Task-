@@ -1,19 +1,12 @@
-# Voice Cloning Dependencies
-
-# Core TTS library
-TTS>=0.22.0
-
-# Deep learning framework
+# Voice Cloning & TTS
+qwen-tts>=0.1.0
 torch>=2.0.0
+torchaudio>=2.0.0
+transformers>=4.30.0
+scipy>=1.10.0
 
-# Audio processing
+# Audio Processing
 pydub>=0.25.1
 
-# Additional dependencies (installed with TTS)
-# numpy
-# scipy
-# librosa
-# transformers
-# encodec
-# System monitoring
+# System Monitoring
 psutil>=5.9.0

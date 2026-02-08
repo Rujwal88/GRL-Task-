@@ -4,7 +4,6 @@ import psutil
 import functools
 import time
 import threading
-from logging.handlers import RotatingFileHandler
 import sys
 
 # Ensure logs directory exists
@@ -25,20 +24,27 @@ def setup_logger(name="voice_cloning"):
     if logger.handlers:
         return logger
 
-    # Formatter: Timestamp - Level - Module - Function - Message
+    # Formatter: Timestamp - Level - Message
+    # The message itself will often contain the metrics
     formatter = logging.Formatter(
-        '%(asctime)s - %(levelname)s - %(module)s - %(funcName)s() - %(message)s'
+        '%(asctime)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S,%f'
+    )
+    # Note: %f gives microseconds (e.g., 512345). We want 'mmm' (milliseconds).
+    # Standard python logging doesn't have %3f. We'll stick to default %f and maybe trim it or just accept it.
+    # Actually, let's fix the datefmt to be close. The default comma separator comes from the formatter.
+    # The user asked for "2025-08-27 12:14:32,646".
+    # logging default uses comma for msecs.
+    formatter = logging.Formatter(
+        '%(asctime)s - %(levelname)s - %(message)s'
     )
 
     # File Handler
-    file_handler = RotatingFileHandler(
-        LOG_FILE, maxBytes=5*1024*1024, backupCount=5, encoding='utf-8'
-    )
+    file_handler = logging.FileHandler(LOG_FILE, encoding='utf-8', mode='w') # Overwrite mode for clean run logs
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
     # Console Handler
-    # Ensure stdout handles unicode (emojis) on Windows
     if sys.platform == 'win32' and hasattr(sys.stdout, 'reconfigure'):
         try:
             sys.stdout.reconfigure(encoding='utf-8')
@@ -55,58 +61,33 @@ def setup_logger(name="voice_cloning"):
 # Create the logger instance
 logger = setup_logger()
 
-def _get_obj_info(obj):
+class background_monitoring(threading.Thread):
     """
-    Helper to get type and size/shape/len details of an object.
-    Current support: standard types, numpy, torch, pandas.
+    Background thread to monitor and log CPU/RAM usage continuously.
     """
-    type_name = type(obj).__name__
-    details = ""
-    
-    try:
-        if hasattr(obj, '__len__'):
-            details = f"len={len(obj)}"
-        elif hasattr(obj, 'shape'): # Numpy / Torch
-            details = f"shape={obj.shape}"
-        elif hasattr(obj, 'size'): # Numpy
-            details = f"size={obj.size}"
-            
-        # Specific overrides for common libs if available in context
-        # (We rely on duck typing/attributes to avoid strict dependencies here)
-        
-    except:
-        pass # Fallback if inspection fails
-        
-    return f"<{type_name}{f' ({details})' if details else ''}>"
-
-class PerformanceMonitor(threading.Thread):
-    """
-    Background thread to monitor and log CPU/RAM usage in real-time.
-    """
-    def __init__(self, interval=0.5, func_name="Unknown"):
+    def __init__(self, interval=0.5):
         super().__init__()
         self.interval = interval
-        self.func_name = func_name
         self.running = True
         self.process = psutil.Process(os.getpid())
-        # Prime CPU counter to avoid 0.0% on first call
+        self.daemon = True # Daemon thread ensuring it dies with main process
+        # Prime CPU counter
         self.process.cpu_percent(interval=None)
 
     def run(self):
         while self.running:
             try:
-                cpu_p = self.process.cpu_percent(interval=None) # Non-blocking
+                time.sleep(self.interval)
+                if not self.running: break
+                
+                cpu_p = self.process.cpu_percent(interval=None)
                 mem_info = self.process.memory_info()
                 mem_mb = mem_info.rss / (1024 * 1024)
                 
-                # Only log if there's significant activity or at intervals
-                # For this demo, we log every sample to prove it works
-                logger.info(
-                    f"   Create a Monitor 📈 [MONITOR] {self.func_name} running... CPU: {cpu_p:.1f}%, Memory: {mem_mb:.2f} MB"
-                )
-                time.sleep(self.interval)
-            except Exception as e:
-                logger.error(f"Monitor error: {e}")
+                # Log continuously as requested
+                logger.info(f"Background Monitor | CPU: {cpu_p:.1f}% | Memory: {mem_mb:.2f} MB")
+                
+            except Exception:
                 break
 
     def stop(self):
@@ -116,68 +97,50 @@ class PerformanceMonitor(threading.Thread):
 def log_performance(func):
     """
     Decorator to log:
-    - Function Entry (with Args/Kwargs details)
-    - Resource Usage (CPU %, Memory RSS)
-    - Execution Time
-    - Function Exit (with Return info)
+    - Function Entry
+    - Execution Duration
+    - Continuous background monitoring during execution
+    - Final summary with CPU/Memory
     """
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         process = psutil.Process(os.getpid())
-        # Prime CPU counter to avoid 0.0% on first call
+        # Prime CPU
         process.cpu_percent(interval=None)
         
-        # --- PRE-EXECUTION METRICS ---
-        mem_before = process.memory_info().rss / (1024 * 1024)  # MB
+        func_name = func.__name__
+        logger.info(f"Starting execution of: {func_name}")
         
         start_time = time.perf_counter()
         
-        # Start Real-Time Monitor
-        monitor = PerformanceMonitor(interval=0.5, func_name=func.__name__)
+        # Start Continuous Monitor
+        # We start a NEW monitor for each decorated function to get granular logs, 
+        # or we could rely on a global one. A per-function monitor allows us to see metrics *during* that function.
+        monitor = background_monitoring(interval=1.0) # Log every 1 second
         monitor.start()
 
         try:
             result = func(*args, **kwargs)
-            
-            # Format return value for logging (truncate if too long)
-            ret_val_str = str(result)
-            if len(ret_val_str) > 200:
-                ret_val_str = ret_val_str[:200] + "... (truncated)"
-            
-            # Log Exit & Performance
-            end_time = time.perf_counter()
-            mem_after = process.memory_info().rss / (1024 * 1024)
-            duration = end_time - start_time
-            
-            logger.info(
-                f"Exiting {func.__name__}\n"
-                f"   ⏱️  Duration: {duration:.4f}s\n"
-                f"   💾 Memory: {mem_before:.2f}MB -> {mem_after:.2f}MB (Delta: {mem_after - mem_before:+.2f}MB)\n"
-                f"   ⚙️  CPU Usage (Process): {process.cpu_percent(interval=None):.1f}%\n"
-                f"   🔙 Return: {_get_obj_info(result)} :: {ret_val_str}"
-            )
-            
             return result
-        
         except Exception as e:
-            logger.error(f"CRITICAL ERROR in {func.__name__}: {str(e)}", exc_info=True)
+            logger.error(f"Error in {func_name}: {e}")
             raise
         finally:
-            # Ensure monitor stops even if function crashes
             monitor.stop()
             monitor.join(timeout=1.0)
             
+            end_time = time.perf_counter()
+            duration_ms = (end_time - start_time) * 1000
+            
+            # Final Snapshot
+            cpu_usage = process.cpu_percent(interval=None)
+            mem_usage_mb = process.memory_info().rss / (1024 * 1024)
+            
+            # Specific format requested:
+            # "... - INFO - Frame processed in 595.21 ms ..., CPU: 13.3%, Memory: 202.64 MB"
+            # Adapting "Frame processed" to "Task executed" or "{func_name} executed"
+            logger.info(
+                f"{func_name} executed in {duration_ms:.2f} ms, CPU: {cpu_usage:.1f}%, Memory: {mem_usage_mb:.2f} MB"
+            )
+
     return wrapper
-
-if __name__ == "__main__":
-    # Test the logger and decorator
-    logger.info("Testing logger_config.py directly...")
-    
-    @log_performance
-    def test_function(n, data):
-        logger.info(f"Inside test function with n={n}")
-        time.sleep(0.1)
-        return [x * 2 for x in data]
-
-    test_function(5, data=[1, 2, 3, 4, 5])
-    logger.info("Test complete.")
