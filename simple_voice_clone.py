@@ -33,6 +33,15 @@ except ImportError:
 # Import structured logging
 from logger_config import logger, log_performance
 
+# --- TRANSCRIPTION ---
+try:
+    import speech_recognition as sr
+    TRANSCRIPTION_AVAILABLE = True
+except ImportError:
+    TRANSCRIPTION_AVAILABLE = False
+    # Logged in main
+
+
 # --- CONFIGURATION ---
 INPUT_AUDIO = "input_audio.wav"
 OUTPUT_AUDIO = "output_audio.wav"
@@ -57,6 +66,38 @@ def log_system_info():
         logger.warning("Torch Version: Not Available (Import Failed)")
         
     logger.info("===========================")
+
+@log_performance
+def transcribe_audio(audio_path):
+    """
+    Transcribe audio content to text using SpeechRecognition (Google API).
+    """
+    if not TRANSCRIPTION_AVAILABLE:
+        logger.warning("SpeechRecognition library not found. Using fallback text.")
+        return None
+
+    logger.info(f"Transcribing audio: {audio_path}")
+    recognizer = sr.Recognizer()
+    
+    try:
+        with sr.AudioFile(audio_path) as source:
+            # record the audio file
+            audio_data = recognizer.record(source)
+            # transcribe
+            text = recognizer.recognize_google(audio_data)
+            logger.info(f"Transcription successful: '{text}'")
+            return text
+            
+    except sr.UnknownValueError:
+        logger.error("Speech Recognition could not understand audio.")
+        return None
+    except sr.RequestError as e:
+        logger.error(f"Could not request results from Speech Recognition service; {e}")
+        return None
+    except Exception as e:
+        logger.error(f"Error during transcription: {e}")
+        return None
+
 
 @log_performance
 def standardize_audio(input_path, output_path):
@@ -170,7 +211,8 @@ def main():
     log_system_info()
     logger.info("=== Voice Cloning Pipeline Started ===")
     
-    TEXT = "This is a demonstration of the Qwen 3 Text to Speech model."
+    # Default text in case transcription fails
+    final_text = "This is a demonstration of the Qwen 3 Text to Speech model."
     
     # 1. Standardize Input
     try:
@@ -190,9 +232,22 @@ def main():
         logger.error(f"Critical error in standardization: {e}")
         return
 
-    # 2. Generate Output
+    # 2. Transcribe
     try:
-        generate_audio_qwen3(TEXT, standardized_input, OUTPUT_AUDIO)
+        transcribed_text = transcribe_audio(standardized_input)
+        if transcribed_text:
+            final_text = transcribed_text
+            logger.info(f"Process will use transcribed text: '{final_text}'")
+        else:
+            logger.warning(f"Transcription failed or returned empty. Using default text: '{final_text}'")
+    except Exception as e:
+        logger.error(f"Error during transcription setup: {e}")
+        # Continue with default text
+
+
+    # 3. Generate Output
+    try:
+        generate_audio_qwen3(final_text, standardized_input, OUTPUT_AUDIO)
     except Exception as e:
         logger.error(f"Critical error in generation: {e}")
         

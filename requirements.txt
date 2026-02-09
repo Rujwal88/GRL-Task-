@@ -10,3 +10,6 @@ pydub>=0.25.1
 
 # System Monitoring
 psutil>=5.9.0
+
+# Transcription
+SpeechRecognition>=3.10.0
