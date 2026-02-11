@@ -40,7 +40,7 @@ def setup_logger(name="voice_cloning"):
     )
 
     # File Handler
-    file_handler = logging.FileHandler(LOG_FILE, encoding='utf-8', mode='w') # Overwrite mode for clean run logs
+    file_handler = logging.FileHandler(LOG_FILE, encoding='utf-8', mode='a') # Append mode to prevent truncation by subprocesses
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
