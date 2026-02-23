@@ -160,7 +160,8 @@ def generate_audio_qwen3(text, prompt_audio, output_file):
             device = "cuda" if torch.cuda.is_available() else "cpu"
             logger.info(f"Loading Qwen3 model on {device}...")
             # Assuming usage based on common patterns
-            qwen_model = Qwen3TTSModel(device=device)
+            # qwen_model = Qwen3TTSModel(device=device) # invalid
+            qwen_model = Qwen3TTSModel.from_pretrained("Alibaba-Qwen/Qwen3-TTS", device_map=device)
             logger.info("Qwen3 Model Loaded.")
         else:
             logger.warning("Torch not available. Skipping Qwen3 initialization.")
