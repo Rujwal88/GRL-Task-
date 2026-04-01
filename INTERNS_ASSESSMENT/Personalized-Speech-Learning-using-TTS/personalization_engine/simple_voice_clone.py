@@ -43,8 +43,8 @@ except ImportError:
 
 
 # --- CONFIGURATION ---
-INPUT_AUDIO = "input_audio.wav"
-OUTPUT_AUDIO = "output_audio.wav"
+INPUT_AUDIO = "../profiles/input_audio.wav"
+OUTPUT_AUDIO = "../output/output_audio.wav"
 # Updated requirement: 16kHz for standardization
 TARGET_SAMPLE_RATE = 16000 
 
@@ -228,7 +228,7 @@ def main():
                  logger.error(f"No input audio found. Please provide '{INPUT_AUDIO}'.")
                  return
 
-        standardized_input = standardize_audio(INPUT_AUDIO, "input_audio.wav")
+        standardized_input = standardize_audio(INPUT_AUDIO, "../output/standardized_input.wav")
     except Exception as e:
         logger.error(f"Critical error in standardization: {e}")
         return
