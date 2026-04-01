@@ -1,119 +1,75 @@
-2026-02-18 21:57:32,241 - INFO - === System Startup Info ===
-2026-02-18 21:57:32,241 - INFO - Python Version: 3.11.9
-2026-02-18 21:57:32,346 - INFO - OS/Platform: Windows-10-10.0.26100-SP0
-2026-02-18 21:57:32,346 - INFO - Torch Version: 2.5.1+cpu
-2026-02-18 21:57:32,346 - INFO - CUDA Available: False
-2026-02-18 21:57:32,346 - INFO - ===========================
-2026-02-18 21:57:32,346 - INFO - === Voice Cloning Pipeline Started ===
-2026-02-18 21:57:32,347 - INFO - Starting execution of: standardize_audio
-2026-02-18 21:57:32,348 - INFO - Processing input audio: input_audio.wav
-2026-02-18 21:57:33,361 - INFO - Background Monitor | CPU: 90.7% | Memory: 188.08 MB
-2026-02-18 21:57:34,408 - INFO - Background Monitor | CPU: 61.2% | Memory: 192.94 MB
-2026-02-18 21:57:35,499 - INFO - Background Monitor | CPU: 61.5% | Memory: 195.65 MB
-2026-02-18 21:57:36,570 - INFO - Background Monitor | CPU: 57.3% | Memory: 193.32 MB
-2026-02-18 21:57:37,649 - INFO - Background Monitor | CPU: 60.9% | Memory: 175.45 MB
-2026-02-18 21:57:38,691 - INFO - Background Monitor | CPU: 67.2% | Memory: 167.10 MB
-2026-02-18 21:57:39,766 - INFO - Background Monitor | CPU: 79.7% | Memory: 164.25 MB
-2026-02-18 21:57:40,820 - INFO - Background Monitor | CPU: 77.6% | Memory: 153.04 MB
-2026-02-18 21:57:41,877 - INFO - Background Monitor | CPU: 67.7% | Memory: 131.57 MB
-2026-02-18 21:57:42,943 - INFO - Background Monitor | CPU: 61.7% | Memory: 135.55 MB
-2026-02-18 21:57:44,136 - INFO - Background Monitor | CPU: 59.2% | Memory: 119.15 MB
-2026-02-18 21:57:45,235 - INFO - Background Monitor | CPU: 63.3% | Memory: 73.80 MB
-2026-02-18 21:57:46,307 - INFO - Background Monitor | CPU: 45.6% | Memory: 41.92 MB
-2026-02-18 21:57:47,362 - INFO - Background Monitor | CPU: 70.6% | Memory: 41.92 MB
-2026-02-18 21:57:48,397 - INFO - Background Monitor | CPU: 71.2% | Memory: 23.86 MB
-2026-02-18 21:57:48,502 - INFO - Standardized audio saved to: input_audio.wav
-2026-02-18 21:57:49,429 - INFO - standardize_audio executed in 17084.38 ms, CPU: 62.6%, Memory: 14.62 MB
-2026-02-18 21:57:49,431 - INFO - Starting execution of: transcribe_audio
-2026-02-18 21:57:49,460 - INFO - Transcribing audio: input_audio.wav
-2026-02-18 21:57:50,465 - INFO - Background Monitor | CPU: 6.0% | Memory: 23.56 MB
-2026-02-18 21:57:51,468 - INFO - Background Monitor | CPU: 0.0% | Memory: 22.49 MB
-2026-02-18 21:57:52,474 - INFO - Background Monitor | CPU: 1.6% | Memory: 22.19 MB
-2026-02-18 21:57:53,495 - INFO - Background Monitor | CPU: 0.0% | Memory: 21.30 MB
-2026-02-18 21:57:54,496 - INFO - Background Monitor | CPU: 0.0% | Memory: 20.28 MB
-2026-02-18 21:57:55,498 - INFO - Background Monitor | CPU: 0.0% | Memory: 20.28 MB
-2026-02-18 21:57:56,525 - INFO - Background Monitor | CPU: 0.0% | Memory: 20.28 MB
-2026-02-18 21:57:57,532 - INFO - Background Monitor | CPU: 0.0% | Memory: 20.18 MB
-2026-02-18 21:57:58,543 - INFO - Background Monitor | CPU: 0.0% | Memory: 18.02 MB
-2026-02-18 21:57:59,548 - INFO - Background Monitor | CPU: 0.0% | Memory: 10.55 MB
-2026-02-18 21:58:00,552 - INFO - Background Monitor | CPU: 0.0% | Memory: 6.82 MB
-2026-02-18 21:58:01,556 - INFO - Background Monitor | CPU: 0.0% | Memory: 4.94 MB
-2026-02-18 21:58:02,559 - INFO - Background Monitor | CPU: 0.0% | Memory: 5.73 MB
-2026-02-18 21:58:03,561 - INFO - Background Monitor | CPU: 0.0% | Memory: 5.26 MB
-2026-02-18 21:58:04,582 - INFO - Background Monitor | CPU: 0.0% | Memory: 5.03 MB
-2026-02-18 21:58:05,613 - INFO - Background Monitor | CPU: 0.0% | Memory: 4.92 MB
-2026-02-18 21:58:06,628 - INFO - Background Monitor | CPU: 0.0% | Memory: 4.84 MB
-2026-02-18 21:58:07,684 - INFO - Background Monitor | CPU: 0.0% | Memory: 4.84 MB
-2026-02-18 21:58:08,698 - INFO - Background Monitor | CPU: 0.0% | Memory: 4.83 MB
-2026-02-18 21:58:09,699 - INFO - Background Monitor | CPU: 0.0% | Memory: 4.82 MB
-2026-02-18 21:58:10,700 - INFO - Background Monitor | CPU: 0.0% | Memory: 4.82 MB
-2026-02-18 21:58:11,729 - INFO - Background Monitor | CPU: 0.0% | Memory: 3.98 MB
-2026-02-18 21:58:12,782 - INFO - Background Monitor | CPU: 0.0% | Memory: 3.31 MB
-2026-02-18 21:58:13,884 - INFO - Transcription successful: 'cal ka morning in a small town surrounded by Hills they lived a young person who believe their life was ordinary everyday look the same waking up early walking the same route and timing the same dreams it deep inside there was a question that never state silent what is small steps for change everything one evening while watching the sun Singh behind the mountains the decided to try something new not something we are romantic just one small affect each day the beginning reading 10 pages learning one new skill and helping one person whenever they could at first nothing same difference that the effort was useless but slowly change begin knowledge reflection'
-2026-02-18 21:58:14,030 - INFO - transcribe_audio executed in 24599.02 ms, CPU: 0.5%, Memory: 5.44 MB
-2026-02-18 21:58:14,034 - INFO - Process will use transcribed text: 'cal ka morning in a small town surrounded by Hills they lived a young person who believe their life was ordinary everyday look the same waking up early walking the same route and timing the same dreams it deep inside there was a question that never state silent what is small steps for change everything one evening while watching the sun Singh behind the mountains the decided to try something new not something we are romantic just one small affect each day the beginning reading 10 pages learning one new skill and helping one person whenever they could at first nothing same difference that the effort was useless but slowly change begin knowledge reflection'
-2026-02-18 21:58:14,042 - INFO - Starting execution of: generate_audio_qwen3
-2026-02-18 21:58:14,061 - INFO - Initializing Qwen3 TTS generation...
-2026-02-18 21:58:15,096 - INFO - Background Monitor | CPU: 9.0% | Memory: 17.54 MB
-2026-02-18 21:58:16,112 - INFO - Background Monitor | CPU: 12.3% | Memory: 25.04 MB
-2026-02-18 21:58:17,124 - INFO - Background Monitor | CPU: 32.3% | Memory: 36.71 MB
-2026-02-18 21:58:18,179 - INFO - Background Monitor | CPU: 16.4% | Memory: 41.02 MB
-2026-02-18 21:58:19,184 - INFO - Background Monitor | CPU: 12.3% | Memory: 46.25 MB
-2026-02-18 21:58:20,190 - INFO - Background Monitor | CPU: 20.3% | Memory: 51.20 MB
-2026-02-18 21:58:24,426 - INFO - Background Monitor | CPU: 10.3% | Memory: 96.68 MB
-2026-02-18 21:58:25,445 - INFO - Background Monitor | CPU: 18.5% | Memory: 99.05 MB
-2026-02-18 21:58:26,478 - INFO - Background Monitor | CPU: 42.4% | Memory: 100.39 MB
-2026-02-18 21:58:27,480 - INFO - Background Monitor | CPU: 21.5% | Memory: 100.21 MB
-2026-02-18 21:58:28,508 - INFO - Background Monitor | CPU: 13.9% | Memory: 99.24 MB
-2026-02-18 21:58:29,514 - INFO - Background Monitor | CPU: 7.7% | Memory: 96.37 MB
-2026-02-18 21:58:30,523 - INFO - Background Monitor | CPU: 12.5% | Memory: 93.75 MB
-2026-02-18 21:58:31,543 - INFO - Background Monitor | CPU: 28.8% | Memory: 94.02 MB
-2026-02-18 21:58:32,566 - INFO - Background Monitor | CPU: 20.0% | Memory: 91.98 MB
-2026-02-18 21:58:33,592 - INFO - Background Monitor | CPU: 28.8% | Memory: 92.49 MB
-2026-02-18 21:58:34,651 - INFO - Background Monitor | CPU: 30.9% | Memory: 68.87 MB
-2026-02-18 21:58:35,661 - INFO - Background Monitor | CPU: 35.9% | Memory: 44.80 MB
-2026-02-18 21:58:36,674 - INFO - Background Monitor | CPU: 38.5% | Memory: 32.68 MB
-2026-02-18 21:58:37,680 - INFO - Background Monitor | CPU: 16.9% | Memory: 27.37 MB
-2026-02-18 21:58:38,684 - INFO - Background Monitor | CPU: 34.4% | Memory: 22.44 MB
-2026-02-18 21:58:40,172 - INFO - Background Monitor | CPU: 23.4% | Memory: 32.35 MB
-2026-02-18 21:58:41,184 - INFO - Background Monitor | CPU: 1.5% | Memory: 24.91 MB
-2026-02-18 21:58:42,188 - INFO - Background Monitor | CPU: 4.7% | Memory: 25.88 MB
-2026-02-18 21:58:43,234 - INFO - Background Monitor | CPU: 7.5% | Memory: 26.83 MB
-2026-02-18 21:58:44,282 - INFO - Background Monitor | CPU: 3.0% | Memory: 30.62 MB
-2026-02-18 21:58:45,291 - INFO - Background Monitor | CPU: 9.2% | Memory: 35.38 MB
-2026-02-18 21:58:46,311 - INFO - Background Monitor | CPU: 10.8% | Memory: 39.10 MB
-2026-02-18 21:58:47,324 - INFO - Background Monitor | CPU: 3.1% | Memory: 41.30 MB
-2026-02-18 21:58:48,346 - INFO - Background Monitor | CPU: 13.9% | Memory: 45.04 MB
-2026-02-18 21:58:49,349 - INFO - Background Monitor | CPU: 15.6% | Memory: 50.27 MB
-2026-02-18 21:58:50,357 - INFO - Background Monitor | CPU: 18.5% | Memory: 55.46 MB
-2026-02-18 21:58:51,377 - INFO - Background Monitor | CPU: 23.1% | Memory: 61.22 MB
-2026-02-18 21:58:52,397 - INFO - Background Monitor | CPU: 50.0% | Memory: 77.83 MB
-2026-02-18 21:58:54,567 - INFO - Background Monitor | CPU: 21.0% | Memory: 139.38 MB
-2026-02-18 21:58:55,573 - INFO - Background Monitor | CPU: 36.9% | Memory: 147.23 MB
-2026-02-18 21:58:56,574 - INFO - Background Monitor | CPU: 31.2% | Memory: 153.83 MB
-2026-02-18 21:58:57,575 - INFO - Background Monitor | CPU: 39.1% | Memory: 176.65 MB
-2026-02-18 21:58:58,576 - INFO - Background Monitor | CPU: 56.2% | Memory: 194.83 MB
-2026-02-18 21:58:59,588 - INFO - Background Monitor | CPU: 47.7% | Memory: 212.84 MB
-2026-02-18 21:59:00,596 - INFO - Background Monitor | CPU: 54.7% | Memory: 226.54 MB
-2026-02-18 21:59:01,597 - INFO - Background Monitor | CPU: 45.3% | Memory: 236.82 MB
-2026-02-18 21:59:02,605 - INFO - Background Monitor | CPU: 44.6% | Memory: 239.69 MB
-2026-02-18 21:59:03,606 - INFO - Background Monitor | CPU: 26.6% | Memory: 242.39 MB
-2026-02-18 21:59:04,608 - INFO - Background Monitor | CPU: 4.7% | Memory: 239.16 MB
-2026-02-18 21:59:05,616 - INFO - Background Monitor | CPU: 0.0% | Memory: 231.17 MB
-2026-02-18 21:59:06,668 - INFO - Background Monitor | CPU: 14.9% | Memory: 239.39 MB
-2026-02-18 21:59:07,682 - INFO - Background Monitor | CPU: 23.1% | Memory: 234.59 MB
-2026-02-18 21:59:08,709 - INFO - Background Monitor | CPU: 13.6% | Memory: 238.80 MB
-2026-02-18 21:59:09,764 - INFO - Background Monitor | CPU: 13.4% | Memory: 195.74 MB
-2026-02-18 21:59:10,913 - INFO - Background Monitor | CPU: 14.9% | Memory: 142.26 MB
-2026-02-18 21:59:11,729 - INFO - Loading Qwen3 model on cpu...
-2026-02-18 21:59:11,916 - INFO - Background Monitor | CPU: 21.9% | Memory: 107.38 MB
-2026-02-18 21:59:12,943 - INFO - Background Monitor | CPU: 34.8% | Memory: 43.99 MB
-2026-02-18 21:59:13,947 - INFO - Background Monitor | CPU: 7.8% | Memory: 45.42 MB
-2026-02-18 21:59:14,173 - WARNING - Qwen3 Import Failed: Alibaba-Qwen/Qwen3-TTS is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+2026-04-01 10:09:22,263 - INFO - === System Startup Info ===
+2026-04-01 10:09:22,283 - INFO - Python Version: 3.11.9
+2026-04-01 10:09:22,317 - INFO - OS/Platform: Windows-10-10.0.26200-SP0
+2026-04-01 10:09:22,317 - INFO - Torch Version: 2.5.1+cpu
+2026-04-01 10:09:22,317 - INFO - CUDA Available: False
+2026-04-01 10:09:22,318 - INFO - ===========================
+2026-04-01 10:09:22,318 - INFO - === Voice Cloning Pipeline Started ===
+2026-04-01 10:09:22,319 - INFO - 'input_audio.wav' not found. Using 'standardized_ref.wav' instead.
+2026-04-01 10:09:22,395 - INFO - Starting execution of: standardize_audio
+2026-04-01 10:09:22,414 - INFO - Processing input audio: input_audio.wav
+2026-04-01 10:09:23,441 - INFO - Background Monitor | CPU: 65.7% | Memory: 134.52 MB
+2026-04-01 10:09:24,484 - INFO - Background Monitor | CPU: 70.1% | Memory: 140.56 MB
+2026-04-01 10:09:25,529 - INFO - Background Monitor | CPU: 89.5% | Memory: 142.07 MB
+2026-04-01 10:09:26,577 - INFO - Background Monitor | CPU: 83.6% | Memory: 147.79 MB
+2026-04-01 10:09:27,631 - INFO - Background Monitor | CPU: 98.5% | Memory: 147.56 MB
+2026-04-01 10:09:28,675 - INFO - Background Monitor | CPU: 86.6% | Memory: 152.18 MB
+2026-04-01 10:09:29,705 - INFO - Background Monitor | CPU: 92.4% | Memory: 103.77 MB
+2026-04-01 10:09:30,751 - INFO - Background Monitor | CPU: 94.0% | Memory: 112.32 MB
+2026-04-01 10:09:31,791 - INFO - Background Monitor | CPU: 78.8% | Memory: 65.52 MB
+2026-04-01 10:09:32,834 - INFO - Background Monitor | CPU: 86.6% | Memory: 65.52 MB
+2026-04-01 10:09:33,354 - INFO - Standardized audio saved to: input_audio.wav
+2026-04-01 10:09:33,910 - INFO - standardize_audio executed in 11512.97 ms, CPU: 81.1%, Memory: 36.66 MB
+2026-04-01 10:09:33,927 - INFO - Starting execution of: transcribe_audio
+2026-04-01 10:09:33,948 - INFO - Transcribing audio: input_audio.wav
+2026-04-01 10:09:34,948 - INFO - Background Monitor | CPU: 6.1% | Memory: 45.38 MB
+2026-04-01 10:09:35,950 - INFO - Background Monitor | CPU: 0.0% | Memory: 46.13 MB
+2026-04-01 10:09:36,951 - INFO - Background Monitor | CPU: 1.6% | Memory: 32.86 MB
+2026-04-01 10:09:37,953 - INFO - Background Monitor | CPU: 0.0% | Memory: 27.30 MB
+2026-04-01 10:09:38,954 - INFO - Background Monitor | CPU: 0.0% | Memory: 21.07 MB
+2026-04-01 10:09:39,955 - INFO - Background Monitor | CPU: 0.0% | Memory: 21.07 MB
+2026-04-01 10:09:40,957 - INFO - Background Monitor | CPU: 0.0% | Memory: 21.07 MB
+2026-04-01 10:09:41,958 - INFO - Background Monitor | CPU: 0.0% | Memory: 21.07 MB
+2026-04-01 10:09:42,959 - INFO - Background Monitor | CPU: 0.0% | Memory: 21.07 MB
+2026-04-01 10:09:43,961 - INFO - Background Monitor | CPU: 0.0% | Memory: 21.04 MB
+2026-04-01 10:09:44,962 - INFO - Background Monitor | CPU: 0.0% | Memory: 18.81 MB
+2026-04-01 10:09:45,964 - INFO - Background Monitor | CPU: 0.0% | Memory: 18.83 MB
+2026-04-01 10:09:46,965 - INFO - Background Monitor | CPU: 0.0% | Memory: 18.83 MB
+2026-04-01 10:09:47,967 - INFO - Background Monitor | CPU: 0.0% | Memory: 11.08 MB
+2026-04-01 10:09:48,802 - INFO - Transcription successful: 'cal ka morning in a small town surrounded by Hills they lived in person who believe their life was ordinary everyday look the same waking up early walking the same route and timing the same dreams it deep inside there was a question that never state silent what is small steps for change everything one evening while watching the sun Singh behind the mountains the decided to try something new not something make automatic just one small affect each day the beginning reading 10 pages learning one new skill and helping one person whenever they could at first nothing same difference that the effort was useless but slowly change begin knowledge relation'
+2026-04-01 10:09:48,983 - INFO - transcribe_audio executed in 15054.26 ms, CPU: 0.5%, Memory: 7.32 MB
+2026-04-01 10:09:48,985 - INFO - Process will use transcribed text: 'cal ka morning in a small town surrounded by Hills they lived in person who believe their life was ordinary everyday look the same waking up early walking the same route and timing the same dreams it deep inside there was a question that never state silent what is small steps for change everything one evening while watching the sun Singh behind the mountains the decided to try something new not something make automatic just one small affect each day the beginning reading 10 pages learning one new skill and helping one person whenever they could at first nothing same difference that the effort was useless but slowly change begin knowledge relation'
+2026-04-01 10:09:48,987 - INFO - Starting execution of: generate_audio_qwen3
+2026-04-01 10:09:48,988 - INFO - Initializing Qwen3 TTS generation...
+2026-04-01 10:09:49,989 - INFO - Background Monitor | CPU: 37.5% | Memory: 35.12 MB
+2026-04-01 10:09:51,020 - INFO - Background Monitor | CPU: 42.4% | Memory: 46.34 MB
+2026-04-01 10:09:52,138 - INFO - Background Monitor | CPU: 26.4% | Memory: 53.43 MB
+2026-04-01 10:09:53,140 - INFO - Background Monitor | CPU: 45.3% | Memory: 103.23 MB
+2026-04-01 10:09:54,141 - INFO - Background Monitor | CPU: 62.5% | Memory: 104.96 MB
+2026-04-01 10:09:55,143 - INFO - Background Monitor | CPU: 59.4% | Memory: 106.75 MB
+2026-04-01 10:09:56,144 - INFO - Background Monitor | CPU: 73.4% | Memory: 107.99 MB
+2026-04-01 10:09:57,145 - INFO - Background Monitor | CPU: 75.0% | Memory: 108.83 MB
+2026-04-01 10:09:58,147 - INFO - Background Monitor | CPU: 56.2% | Memory: 113.37 MB
+2026-04-01 10:09:59,148 - INFO - Background Monitor | CPU: 25.0% | Memory: 117.21 MB
+2026-04-01 10:10:00,149 - INFO - Background Monitor | CPU: 64.1% | Memory: 142.64 MB
+2026-04-01 10:10:01,150 - INFO - Background Monitor | CPU: 71.9% | Memory: 157.66 MB
+2026-04-01 10:10:02,152 - INFO - Background Monitor | CPU: 53.9% | Memory: 173.92 MB
+2026-04-01 10:10:03,153 - INFO - Background Monitor | CPU: 50.0% | Memory: 187.53 MB
+2026-04-01 10:10:04,154 - INFO - Background Monitor | CPU: 7.8% | Memory: 189.65 MB
+2026-04-01 10:10:05,159 - INFO - Background Monitor | CPU: 65.6% | Memory: 207.66 MB
+2026-04-01 10:10:06,160 - INFO - Background Monitor | CPU: 62.5% | Memory: 230.45 MB
+2026-04-01 10:10:07,162 - INFO - Background Monitor | CPU: 68.8% | Memory: 240.21 MB
+2026-04-01 10:10:08,163 - INFO - Background Monitor | CPU: 67.2% | Memory: 239.63 MB
+2026-04-01 10:10:09,306 - INFO - Background Monitor | CPU: 11.0% | Memory: 239.67 MB
+2026-04-01 10:10:10,314 - INFO - Background Monitor | CPU: 61.6% | Memory: 239.52 MB
+2026-04-01 10:10:11,317 - INFO - Background Monitor | CPU: 12.5% | Memory: 239.59 MB
+2026-04-01 10:10:11,673 - INFO - Loading Qwen3 model on cpu...
+2026-04-01 10:10:12,318 - INFO - Background Monitor | CPU: 56.2% | Memory: 239.45 MB
+2026-04-01 10:10:12,911 - WARNING - Qwen3 Import Failed: Alibaba-Qwen/Qwen3-TTS is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
 If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `hf auth login` or by passing `token=<your_token>`
-2026-02-18 21:59:21,643 - WARNING - >> SYSTEM CRITICAL: Qwen3 TTS cannot run due to environment issues.
-2026-02-18 21:59:21,643 - INFO - Execution Mode: SIMULATION / FALLBACK
-2026-02-18 21:59:21,643 - INFO - Generating simulated output to: output_audio.wav
-2026-02-18 21:59:21,803 - INFO - Output generated successfully: output_audio.wav
-2026-02-18 21:59:22,666 - INFO - generate_audio_qwen3 executed in 68617.25 ms, CPU: 18.8%, Memory: 14.63 MB
-2026-02-18 21:59:22,670 - INFO - === Pipeline Completed ===
+2026-04-01 10:10:12,955 - WARNING - >> SYSTEM CRITICAL: Qwen3 TTS cannot run due to environment issues.
+2026-04-01 10:10:12,955 - INFO - Execution Mode: SIMULATION / FALLBACK
+2026-04-01 10:10:12,956 - INFO - Generating simulated output to: output_audio.wav
+2026-04-01 10:10:13,018 - INFO - Output generated successfully: output_audio.wav
+2026-04-01 10:10:13,319 - INFO - generate_audio_qwen3 executed in 24332.76 ms, CPU: 47.8%, Memory: 238.72 MB
+2026-04-01 10:10:13,319 - INFO - === Pipeline Completed ===
