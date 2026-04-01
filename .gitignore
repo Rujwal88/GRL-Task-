@@ -22,3 +22,17 @@ wheels/
 .vscode/
 venv/
 env/
+
+# Custom exclusions
+.venv/
+logs/
+*.log
+*.wav
+!input_audio.wav
+!output_audio.wav
+*.bin
+*.pt
+*.pth
+*.safetensors
+outputs/
+.tmp/
