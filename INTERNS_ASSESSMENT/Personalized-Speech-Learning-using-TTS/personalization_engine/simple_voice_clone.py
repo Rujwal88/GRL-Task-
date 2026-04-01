@@ -233,16 +233,23 @@ def main():
         logger.error(f"Critical error in standardization: {e}")
         return
 
-    # 2. Transcribe
+    # 2. Transcribe or read from input.txt
     try:
-        transcribed_text = transcribe_audio(standardized_input)
-        if transcribed_text:
-            final_text = transcribed_text
-            logger.info(f"Process will use transcribed text: '{final_text}'")
+        if os.path.exists("input.txt"):
+            with open("input.txt", "r", encoding="utf-8") as f:
+                content = f.read().strip()
+                if content:
+                    final_text = content
+                    logger.info(f"Process will use text from input.txt: '{final_text[:50]}...'")
         else:
-            logger.warning(f"Transcription failed or returned empty. Using default text: '{final_text}'")
+            transcribed_text = transcribe_audio(standardized_input)
+            if transcribed_text:
+                final_text = transcribed_text
+                logger.info(f"Process will use transcribed text: '{final_text[:50]}...'")
+            else:
+                logger.warning(f"Transcription failed or returned empty. Using default text: '{final_text[:50]}...'")
     except Exception as e:
-        logger.error(f"Error during transcription setup: {e}")
+        logger.error(f"Error during transcription/text setup: {e}")
         # Continue with default text
 
 
