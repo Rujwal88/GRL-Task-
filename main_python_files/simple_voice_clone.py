@@ -142,7 +142,7 @@ def standardize_audio(input_path, output_path):
         return output_path
 
 @log_performance
-def generate_audio_qwen3(text, prompt_audio, output_file):
+def generate_audio_qwen3(text, prompt_audio, output_file, **kwargs):
     """
     Generate audio using Qwen3 TTS (or fallback simulation).
     """
@@ -161,7 +161,11 @@ def generate_audio_qwen3(text, prompt_audio, output_file):
             logger.info(f"Loading Qwen3 model on {device}...")
             # Assuming usage based on common patterns
             # qwen_model = Qwen3TTSModel(device=device) # invalid
-            qwen_model = Qwen3TTSModel.from_pretrained("Alibaba-Qwen/Qwen3-TTS", device_map=device)
+            qwen_model = Qwen3TTSModel.from_pretrained(
+                "Qwen/Qwen3-TTS-12Hz-0.6B-Base", 
+                device_map=device,
+                torch_dtype=torch.float32
+            )
             logger.info("Qwen3 Model Loaded.")
         else:
             logger.warning("Torch not available. Skipping Qwen3 initialization.")
@@ -178,11 +182,19 @@ def generate_audio_qwen3(text, prompt_audio, output_file):
     if qwen_model and execution_mode == "NORMAL":
         try:
             logger.info(f"Synthesizing text: '{text[:30]}...'")
-            if hasattr(qwen_model, 'tts_to_file'):
-                qwen_model.tts_to_file(text=text, prompt_path=prompt_audio, output_path=output_file)
-            elif hasattr(qwen_model, 'generate'):
-                 audio = qwen_model.generate(text, prompt=prompt_audio)
-                 torchaudio.save(output_file, audio, TARGET_SAMPLE_RATE)
+            if hasattr(qwen_model, 'generate_voice_clone'):
+                logger.info(f"Generating voice clone for text: '{text[:50]}...'")
+                # Pre-transcribe if needed or use the already transcribed text
+                ref_text = kwargs.get('ref_text', None)
+                audio_list, sr = qwen_model.generate_voice_clone(text=text, ref_audio=prompt_audio, ref_text=ref_text)
+                
+                if audio_list and len(audio_list) > 0:
+                    import soundfile as sf
+                    # audio_list[0] is the numpy array for the generated audio
+                    sf.write(output_file, audio_list[0], sr)
+                    logger.info(f"Generation successful. Saved to {output_file}")
+                else:
+                    raise ValueError("Qwen3 generated empty audio list.")
             else:
                 raise AttributeError("Unknown Qwen3 API methods.")
                 
@@ -255,7 +267,7 @@ def main():
 
     # 3. Generate Output
     try:
-        generate_audio_qwen3(final_text, standardized_input, OUTPUT_AUDIO)
+        generate_audio_qwen3(final_text, standardized_input, OUTPUT_AUDIO, ref_text=transcribed_text if 'transcribed_text' in locals() else None)
     except Exception as e:
         logger.error(f"Critical error in generation: {e}")
         
