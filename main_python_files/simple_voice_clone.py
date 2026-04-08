@@ -10,6 +10,7 @@ import shutil
 import platform
 import warnings
 import traceback
+import psutil
 
 # Suppress warnings
 warnings.filterwarnings('ignore')
@@ -158,22 +159,29 @@ def generate_audio_qwen3(text, prompt_audio, output_file, **kwargs):
             # But TORCH_AVAILABLE check handles the basic import success
             from qwen_tts.inference.qwen3_tts_model import Qwen3TTSModel
             device = "cuda" if torch.cuda.is_available() else "cpu"
-            logger.info(f"Loading Qwen3 model on {device}...")
-            # Assuming usage based on common patterns
-            # qwen_model = Qwen3TTSModel(device=device) # invalid
-            qwen_model = Qwen3TTSModel.from_pretrained(
-                "Qwen/Qwen3-TTS-12Hz-0.6B-Base", 
-                device_map=device,
-                torch_dtype=torch.float32
-            )
-            logger.info("Qwen3 Model Loaded.")
+            # Pre-emptive memory check to avoid OS-level OOM kills
+            available_gb = psutil.virtual_memory().available / (1024**3)
+            logger.info(f"Available Memory: {available_gb:.2f} GB")
+            
+            if available_gb < 1.5:
+                logger.warning(f"Insufficient memory ({available_gb:.2f} GB). Minimum 1.5 GB required for Qwen3-0.6B.")
+                execution_mode = "SIMULATION / FALLBACK"
+            else:
+                logger.info(f"Loading Qwen3 model on {device}...")
+                # Use dtype instead of torch_dtype as per deprecation warning
+                qwen_model = Qwen3TTSModel.from_pretrained(
+                    "Qwen/Qwen3-TTS-12Hz-0.6B-Base", 
+                    device_map=device,
+                    dtype=torch.float32
+                )
+                logger.info("Qwen3 Model Loaded.")
         else:
             logger.warning("Torch not available. Skipping Qwen3 initialization.")
             execution_mode = "SIMULATION / FALLBACK"
             
-    except (ImportError, OSError, ModuleNotFoundError) as e:
-        logger.warning(f"Qwen3 Import Failed: {e}")
-        logger.warning(">> SYSTEM CRITICAL: Qwen3 TTS cannot run due to environment issues.")
+    except (ImportError, OSError, ModuleNotFoundError, RuntimeError) as e:
+        logger.warning(f"Qwen3 Initialization Failed: {e}")
+        logger.warning(">> SYSTEM CRITICAL: Qwen3 TTS cannot run due to environment or resource issues.")
         execution_mode = "SIMULATION / FALLBACK"
 
     logger.info(f"Execution Mode: {execution_mode}")
@@ -201,7 +209,7 @@ def generate_audio_qwen3(text, prompt_audio, output_file, **kwargs):
             logger.info("Qwen3 Generation Complete.")
             return
 
-        except Exception as e:
+        except (Exception, RuntimeError) as e:
             logger.error(f"Generation Error during execution: {e}")
             logger.info("⚠️  Attempting fallback due to generation error.")
 
