@@ -43,7 +43,7 @@ except ImportError:
 
 
 # --- CONFIGURATION ---
-INPUT_AUDIO = "../profiles/input_audio.wav"
+INPUT_AUDIO = "../all_inputs/input_audio.wav"
 OUTPUT_AUDIO = "../output/output_audio.wav"
 # Updated requirement: 16kHz for standardization
 TARGET_SAMPLE_RATE = 16000 
@@ -235,8 +235,8 @@ def main():
 
     # 2. Transcribe or read from input.txt
     try:
-        if os.path.exists("input.txt"):
-            with open("input.txt", "r", encoding="utf-8") as f:
+        if os.path.exists("../all_inputs/input.txt"):
+            with open("../all_inputs/input.txt", "r", encoding="utf-8") as f:
                 content = f.read().strip()
                 if content:
                     final_text = content
