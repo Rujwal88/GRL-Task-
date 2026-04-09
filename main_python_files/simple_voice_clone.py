@@ -191,14 +191,32 @@ def generate_audio_qwen3(text, prompt_audio, output_file, **kwargs):
         try:
             logger.info(f"Synthesizing text: '{text[:30]}...'")
             if hasattr(qwen_model, 'generate_voice_clone'):
-                logger.info(f"Generating voice clone for text: '{text[:50]}...'")
-                # Pre-transcribe if needed or use the already transcribed text
+                logger.info(f"Generating voice clone (ICL mode) for text: '{text[:50]}...'")
+                
                 ref_text = kwargs.get('ref_text', None)
-                audio_list, sr = qwen_model.generate_voice_clone(text=text, ref_audio=prompt_audio, ref_text=ref_text)
+                
+                try:
+                    if ref_text:
+                        # Attempt ICL mode (higher quality)
+                        audio_list, sr = qwen_model.generate_voice_clone(
+                            text=text, 
+                            ref_audio=prompt_audio, 
+                            ref_text=ref_text,
+                            x_vector_only_mode=False
+                        )
+                    else:
+                        raise ValueError("No ref_text available for ICL mode.")
+                except Exception as icl_error:
+                    logger.warning(f"ICL mode failed or unavailable: {icl_error}. Trying x_vector_only_mode...")
+                    # Fallback to x_vector_only_mode (lower quality but works without ref_text)
+                    audio_list, sr = qwen_model.generate_voice_clone(
+                        text=text, 
+                        ref_audio=prompt_audio, 
+                        x_vector_only_mode=True
+                    )
                 
                 if audio_list and len(audio_list) > 0:
                     import soundfile as sf
-                    # audio_list[0] is the numpy array for the generated audio
                     sf.write(output_file, audio_list[0], sr)
                     logger.info(f"Generation successful. Saved to {output_file}")
                 else:
@@ -214,16 +232,16 @@ def generate_audio_qwen3(text, prompt_audio, output_file, **kwargs):
             logger.info("⚠️  Attempting fallback due to generation error.")
 
     # Fallback Logic
-    logger.info(f"Generating simulated output to: {output_file}")
+    logger.info(f"Generation process failed. Final fallback location: {output_file}")
     try:
-         # Create a valid wav file for verification
-         if os.path.exists(prompt_audio):
-             shutil.copy(prompt_audio, output_file)
-         else:
-             with open(output_file, 'wb') as f:
-                 f.write(b'RIFF' + b'\x00'*36 + b'DATA' + b'\x00'*100)
+         # We check if output actually exists. If not, we don't just copy the input anymore
+         # unless it's critical for downstream, but the user complained about it.
+         if not os.path.exists(output_file):
+             logger.warning("Generation failed and no output file was created. Creating a marker file.")
+             with open(output_file + ".failed", 'w') as f:
+                 f.write("Generation failed.")
     except Exception as e:
-         logger.error(f"Fallback failed: {e}")
+         logger.error(f"Fallback logging failed: {e}")
 
     if os.path.exists(output_file):
          logger.info(f"Output generated successfully: {output_file}")
@@ -253,31 +271,36 @@ def main():
         logger.error(f"Critical error in standardization: {e}")
         return
 
-    # 2. Transcribe or read from input.txt
+    # 2. Transcribe reference audio (REQUIRED for ICL mode)
+    ref_text = None
+    try:
+        ref_text = transcribe_audio(standardized_input)
+        if not ref_text:
+            logger.warning("Transcription of reference audio failed. Model will attempt x_vector_only_mode.")
+    except Exception as e:
+        logger.error(f"Error during transcription: {e}")
+
+    # 3. Setup Target Text (either from input.txt or transcription)
     try:
         if os.path.exists("../all_inputs/input.txt"):
             with open("../all_inputs/input.txt", "r", encoding="utf-8") as f:
                 content = f.read().strip()
                 if content:
                     final_text = content
-                    logger.info(f"Process will use text from input.txt: '{final_text[:50]}...'")
+                    logger.info(f"Synthesis text sourced from input.txt: '{final_text[:50]}...'")
+        elif ref_text:
+            final_text = ref_text
+            logger.info(f"Synthesis text sourced from transcription: '{final_text[:50]}...'")
         else:
-            transcribed_text = transcribe_audio(standardized_input)
-            if transcribed_text:
-                final_text = transcribed_text
-                logger.info(f"Process will use transcribed text: '{final_text[:50]}...'")
-            else:
-                logger.warning(f"Transcription failed or returned empty. Using default text: '{final_text[:50]}...'")
+            logger.warning(f"No input.txt and no transcription. Using default text: '{final_text[:50]}...'")
     except Exception as e:
-        logger.error(f"Error during transcription/text setup: {e}")
-        # Continue with default text
+        logger.error(f"Error setting up synthesis text: {e}")
 
-
-    # 3. Generate Output
+    # 4. Generate Output
     try:
-        generate_audio_qwen3(final_text, standardized_input, OUTPUT_AUDIO, ref_text=transcribed_text if 'transcribed_text' in locals() else None)
+        generate_audio_qwen3(final_text, standardized_input, OUTPUT_AUDIO, ref_text=ref_text)
     except Exception as e:
-        logger.error(f"Critical error in generation: {e}")
+        logger.error(f"Critical error in generation pipeline: {e}")
         
     logger.info("=== Pipeline Completed ===")
 
