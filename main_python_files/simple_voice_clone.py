@@ -138,56 +138,48 @@ def standardize_audio(input_path, output_path):
         
     except Exception as e:
         logger.error(f"Error standardizing audio: {e}")
-        # Fallback: Just copy if processing fails
-        shutil.copy(input_path, output_path)
-        return output_path
+        raise RuntimeError(f"Standardization failed and fallback is disabled: {e}")
 
 @log_performance
 def generate_audio_qwen3(text, prompt_audio, output_file, **kwargs):
     """
     Generate audio using Qwen3 TTS (or fallback simulation).
     """
-    logger.info("Initializing Qwen3 TTS generation...")
-    
+    # Cleanup old output to prevent reporting false success on stale files
+    if os.path.exists(output_file):
+        os.remove(output_file)
+        logger.info(f"Existing output file {output_file} removed to ensure fresh synthesis.")
+
     qwen_model = None
-    execution_mode = "NORMAL"
     
     # Try Import Qwen3
     try:
         if TORCH_AVAILABLE:
-            # We wrap this because if torch dll failed, even this might be risky if not caught earlier
-            # But TORCH_AVAILABLE check handles the basic import success
             from qwen_tts.inference.qwen3_tts_model import Qwen3TTSModel
             device = "cuda" if torch.cuda.is_available() else "cpu"
-            # Pre-emptive memory check to avoid OS-level OOM kills
+            
+            # Log current memory for diagnostic but do NOT block
             available_gb = psutil.virtual_memory().available / (1024**3)
-            logger.info(f"Available Memory: {available_gb:.2f} GB")
+            logger.info(f"System memory available: {available_gb:.2f} GB. Proceeding with model load...")
             
-            if available_gb < 1.5:
-                logger.warning(f"Insufficient memory ({available_gb:.2f} GB). Minimum 1.5 GB required for Qwen3-0.6B.")
-                execution_mode = "SIMULATION / FALLBACK"
-            else:
-                logger.info(f"Loading Qwen3 model on {device}...")
-                # Use dtype instead of torch_dtype as per deprecation warning
-                qwen_model = Qwen3TTSModel.from_pretrained(
-                    "Qwen/Qwen3-TTS-12Hz-0.6B-Base", 
-                    device_map=device,
-                    dtype=torch.float32
-                )
-                logger.info("Qwen3 Model Loaded.")
+            # Use dtype instead of torch_dtype as per deprecation warning
+            qwen_model = Qwen3TTSModel.from_pretrained(
+                "Qwen/Qwen3-TTS-12Hz-0.6B-Base", 
+                device_map=device,
+                dtype=torch.float32
+            )
+            logger.info("Qwen3 Model Loaded.")
         else:
-            logger.warning("Torch not available. Skipping Qwen3 initialization.")
-            execution_mode = "SIMULATION / FALLBACK"
+            raise ImportError("Torch not available. Cannot run Qwen3.")
             
-    except (ImportError, OSError, ModuleNotFoundError, RuntimeError) as e:
-        logger.warning(f"Qwen3 Initialization Failed: {e}")
-        logger.warning(">> SYSTEM CRITICAL: Qwen3 TTS cannot run due to environment or resource issues.")
-        execution_mode = "SIMULATION / FALLBACK"
+    except Exception as e:
+        logger.error(f"Qwen3 Initialization Failed: {e}")
+        raise RuntimeError(f"Model initialization failed: {e}")
 
-    logger.info(f"Execution Mode: {execution_mode}")
+    logger.info("Execution Mode: STRICT NEURAL SYNTHESIS")
 
-    # Generate or Fallback
-    if qwen_model and execution_mode == "NORMAL":
+    # Generate 
+    if qwen_model:
         try:
             logger.info(f"Synthesizing text: '{text[:30]}...'")
             if hasattr(qwen_model, 'generate_voice_clone'):
@@ -205,9 +197,9 @@ def generate_audio_qwen3(text, prompt_audio, output_file, **kwargs):
                             x_vector_only_mode=False
                         )
                     else:
-                        raise ValueError("No ref_text available for ICL mode.")
+                        raise ValueError("No ref_text provided for ICL mode (In-Context Learning).")
                 except Exception as icl_error:
-                    logger.warning(f"ICL mode failed or unavailable: {icl_error}. Trying x_vector_only_mode...")
+                    logger.warning(f"ICL mode failed: {icl_error}. Trying x_vector_only_mode fallback (Model level)...")
                     # Fallback to x_vector_only_mode (lower quality but works without ref_text)
                     audio_list, sr = qwen_model.generate_voice_clone(
                         text=text, 
@@ -222,29 +214,16 @@ def generate_audio_qwen3(text, prompt_audio, output_file, **kwargs):
                 else:
                     raise ValueError("Qwen3 generated empty audio list.")
             else:
-                raise AttributeError("Unknown Qwen3 API methods.")
+                raise AttributeError("The loaded Qwen3 model does not have 'generate_voice_clone' method.")
                 
             logger.info("Qwen3 Generation Complete.")
             return
 
-        except (Exception, RuntimeError) as e:
-            logger.error(f"Generation Error during execution: {e}")
-            logger.info("⚠️  Attempting fallback due to generation error.")
-
-    # Fallback Logic
-    logger.info(f"Generation process failed. Final fallback location: {output_file}")
-    try:
-         # We check if output actually exists. If not, we don't just copy the input anymore
-         # unless it's critical for downstream, but the user complained about it.
-         if not os.path.exists(output_file):
-             logger.warning("Generation failed and no output file was created. Creating a marker file.")
-             with open(output_file + ".failed", 'w') as f:
-                 f.write("Generation failed.")
-    except Exception as e:
-         logger.error(f"Fallback logging failed: {e}")
-
-    if os.path.exists(output_file):
-         logger.info(f"Output generated successfully: {output_file}")
+        except Exception as e:
+            logger.error(f"Generation Error: {e}")
+            raise RuntimeError(f"Neural synthesis failed: {e}")
+    else:
+        raise RuntimeError("Qwen3 model was not initialized.")
 
 def main():
     log_system_info()
@@ -271,30 +250,46 @@ def main():
         logger.error(f"Critical error in standardization: {e}")
         return
 
-    # 2. Transcribe reference audio (REQUIRED for ICL mode)
+    # 2. Setup Reference Text (Input Text) - Crucial for ICL mode
     ref_text = None
     try:
-        ref_text = transcribe_audio(standardized_input)
-        if not ref_text:
-            logger.warning("Transcription of reference audio failed. Model will attempt x_vector_only_mode.")
-    except Exception as e:
-        logger.error(f"Error during transcription: {e}")
-
-    # 3. Setup Target Text (either from input.txt or transcription)
-    try:
+        # Use input.txt as the text describing exactly what's in input_audio.wav
         if os.path.exists("../all_inputs/input.txt"):
             with open("../all_inputs/input.txt", "r", encoding="utf-8") as f:
                 content = f.read().strip()
                 if content:
-                    final_text = content
-                    logger.info(f"Synthesis text sourced from input.txt: '{final_text[:50]}...'")
-        elif ref_text:
-            final_text = ref_text
-            logger.info(f"Synthesis text sourced from transcription: '{final_text[:50]}...'")
-        else:
-            logger.warning(f"No input.txt and no transcription. Using default text: '{final_text[:50]}...'")
+                    ref_text = content
+                    logger.info(f"Reference text sourced from input.txt: '{ref_text[:50]}...'")
+        
+        # Fallback to transcription if input.txt is missing or empty
+        if not ref_text:
+            logger.info("No text in input.txt. Attempting automatic transcription for reference...")
+            ref_text = transcribe_audio(standardized_input)
+            
+        if not ref_text:
+            logger.warning("No reference text available. Model will try x_vector_only_mode fallback.")
     except Exception as e:
-        logger.error(f"Error setting up synthesis text: {e}")
+        logger.error(f"Error during reference text setup: {e}")
+
+    # 3. Setup Target Synthesis Text (Input_1 Text)
+    try:
+        target_text_found = False
+        if os.path.exists("../all_inputs/input_1.txt"):
+            with open("../all_inputs/input_1.txt", "r", encoding="utf-8") as f:
+                content = f.read().strip()
+                if content:
+                    final_text = content
+                    logger.info(f"Synthesis Target text sourced from input_1.txt: '{final_text[:50]}...'")
+                    target_text_found = True
+        
+        if not target_text_found:
+            if ref_text:
+                final_text = ref_text
+                logger.info(f"No input_1.txt found. Falling back to Reference text for synthesis.")
+            else:
+                logger.warning(f"No synthesis text found. Using default internal text.")
+    except Exception as e:
+        logger.error(f"Error setting up synthesis target text: {e}")
 
     # 4. Generate Output
     try:
