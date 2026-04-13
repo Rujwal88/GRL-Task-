@@ -229,65 +229,47 @@ def main():
     log_system_info()
     logger.info("=== Voice Cloning Pipeline Started ===")
     
-    # Default text in case transcription fails
-    final_text = "This is a demonstration of the Qwen 3 Text to Speech model."
+    final_text = None
     
     # 1. Standardize Input
     try:
         # Check if input exists, if not use any wav found or warn
         if not os.path.exists(INPUT_AUDIO):
-             # Try to find any wav
-             wavs = [f for f in os.listdir('.') if f.endswith('.wav') and f != OUTPUT_AUDIO]
-             if wavs:
-                 logger.info(f"'{INPUT_AUDIO}' not found. Using '{wavs[0]}' instead.")
-                 shutil.copy(wavs[0], INPUT_AUDIO)
-             else:
-                 logger.error(f"No input audio found. Please provide '{INPUT_AUDIO}'.")
-                 return
+            logger.error(f"No input audio found. Please provide '{INPUT_AUDIO}'.")
+            return
 
         standardized_input = standardize_audio(INPUT_AUDIO, "../output/standardized_input.wav")
     except Exception as e:
         logger.error(f"Critical error in standardization: {e}")
         return
 
-    # 2. Setup Reference Text (Input Text) - Crucial for ICL mode
+    # 2. Setup Reference Text and Synthesis Text
     ref_text = None
     try:
-        # Use input.txt as the text describing exactly what's in input_audio.wav
+        # Reference text corresponding to exactly what's in input_audio.wav
         if os.path.exists("../all_inputs/input.txt"):
             with open("../all_inputs/input.txt", "r", encoding="utf-8") as f:
                 content = f.read().strip()
                 if content:
                     ref_text = content
                     logger.info(f"Reference text sourced from input.txt: '{ref_text[:50]}...'")
-        
-        # Fallback to transcription if input.txt is missing or empty
-        if not ref_text:
-            logger.info("No text in input.txt. Attempting automatic transcription for reference...")
-            ref_text = transcribe_audio(standardized_input)
-            
-        if not ref_text:
-            logger.warning("No reference text available. Model will try x_vector_only_mode fallback.")
-    except Exception as e:
-        logger.error(f"Error during reference text setup: {e}")
+        else:
+            logger.warning("No input.txt found for reference text.")
 
-    # 3. Setup Target Synthesis Text (Input_1 Text)
-    try:
-        target_text_found = False
+        # Synthesis text (what the model needs to generate)
         if os.path.exists("../all_inputs/input_1.txt"):
             with open("../all_inputs/input_1.txt", "r", encoding="utf-8") as f:
                 content = f.read().strip()
                 if content:
                     final_text = content
-                    logger.info(f"Synthesis Target text sourced from input_1.txt: '{final_text[:50]}...'")
-                    target_text_found = True
-        
-        if not target_text_found:
-            if ref_text:
-                final_text = ref_text
-                logger.info(f"No input_1.txt found. Falling back to Reference text for synthesis.")
-            else:
-                logger.warning(f"No synthesis text found. Using default internal text.")
+                    logger.info(f"Synthesis text sourced from input_1.txt: '{final_text[:50]}...'")
+        else:
+            logger.warning("No input_1.txt found. Final text is missing.")
+            
+        if not final_text:
+            logger.error("No text available to synthesize. Exiting.")
+            return
+
     except Exception as e:
         logger.error(f"Error setting up synthesis target text: {e}")
 
